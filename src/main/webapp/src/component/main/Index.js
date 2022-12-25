@@ -8,7 +8,7 @@ const Index = () => {
             <h3>***메인 화면***</h3>
             <hr></hr>
             <p><Link to='/store/writeForm'>글쓰기</Link></p>
-            <p><Link to='/store/list'>리스트</Link></p>
+            <p><Link to='/store'>리스트</Link></p>
         </div>
         </div>
     );

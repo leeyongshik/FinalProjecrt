@@ -43,6 +43,6 @@ public class StoreDTO {
 	private String country;
 	
 	@Column(name="img")
-	private String img;
+	private String img; 
 	
 }

@@ -33,6 +33,7 @@ public class StoreController {
 	
 	@GetMapping(path = "isExistSubject")
 	public String isExistSubject(@RequestParam String subject) {
+		System.out.println(subject);
 		return storeService.isExistSubject(subject);
 	}
 	

@@ -18,12 +18,12 @@ import lombok.Data;
 				 , allocationSize = 1
 )
 public class StoreDTO {
-	@Id //@Id로 설정하면 primary key로 설정된다
 	//@GeneratedValue(strategy = GenerationType.AUTO) //특정 데이터베이스에 맞게 자동으로 생성하는 방식, 자동으로 시퀀스 테이블이 생성된다
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STORE_SEQ_GENERATOR")
 	@Column(name="seq")
 	private int seq;
 	
+	@Id //@Id로 설정하면 primary key로 설정된다
 	@Column(name="subject", nullable = false, unique = true, length = 30)
 	private String subject;
 	

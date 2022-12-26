@@ -73,7 +73,7 @@ const StoreIndex = () => {
                         </ul>
                     </li>
                     <li>
-                        <strong className="category_product_title">기프트카드
+                        <strong className={indexStyles.category_product_title}>기프트카드
                             <a href="#" className="btn_category_product">더보기</a>
                         </strong>
                         <ul className="category_product_inner_list">

@@ -86,6 +86,8 @@ import axios from 'axios';
   }
 
   const isExistSubject = () => {
+    console.log('seq='+(seq))
+    console.log('subject='+(subject))
     axios.get(`http://localhost:8080/store/isExistSubject?subject=${subject}`)
          .then(res => {
             setSubjectDiv(res.data === 'non_exist' ? '등록 가능' : '등록 불가능')
@@ -122,7 +124,7 @@ import axios from 'axios';
       <form className={ styles.writeForm }>
         <input type="text" name="seq" value={ seq } onChange={ onInput } width= '100px' />
         <br/>
-
+        
         <table border="1">
           <thead>
             <tr>

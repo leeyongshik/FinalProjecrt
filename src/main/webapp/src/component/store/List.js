@@ -16,7 +16,7 @@ const List = () => {
                         <ul className="bxslider" style={{width: 'auto', position: 'relative'}}>
                             <li style={{float: 'none', listStyle: 'none' , position: 'absolute', width: '980px', display: 'block'}}>
                                 <Link to='/store'>
-                                    <img src="http://img.cgv.co.kr/GiftStore/Display/PC/15468087168510.jpg" alt="기프트샵"/>   
+                                    <img src="../img/store2.jpg" alt="기프트샵"/>   
                                 </Link>
                             </li>
                         </ul>

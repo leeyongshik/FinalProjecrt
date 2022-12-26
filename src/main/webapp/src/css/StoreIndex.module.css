@@ -7,6 +7,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     vertical-align: baseline;
     word-break: break-all;
 }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 .category_product_wrap {
     width: 980px;
     margin: 0 auto;
@@ -54,6 +58,7 @@ ol, ul {
     width: 23px;
     height: 23px;
     font-size: 0;
+    
 }
 .category_product_list > li:first-child .category_product_inner_list li {
     width: 220px;
@@ -69,6 +74,7 @@ ol, ul {
 .category_product_inner_list {
     overflow: hidden;
 }
+
 .category_product_list > li:first-child .category_product_inner_list li:first-child {
     margin-left: 0;
 }

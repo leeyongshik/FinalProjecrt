@@ -8,7 +8,7 @@ const StoreIndex = () => {
                 <ul className={indexStyles.category_product_list}>
                     <li>
                         <strong className={indexStyles.category_product_title}>영화관람권
-                            <a href="#" className={indexStyles.btn_category_product}>더보기</a>
+                            <a href="#" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
                             <li className="">

@@ -58,7 +58,6 @@ ol, ul {
     width: 23px;
     height: 23px;
     font-size: 0;
-    
 }
 .category_product_list > li:first-child .category_product_inner_list li {
     width: 220px;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import mainImg from '../../img/logo.jpg';
 import styles from '../../css/writeForm.module.css';
 import axios from 'axios';
 
@@ -15,7 +14,7 @@ import axios from 'axios';
     country: '',
     img: ''
   })
-  const { subject, content, price, country } = form //비구조할당
+  const { seq, subject, subSubject, simpleContent, content, price, country, img } = form //비구조할당
 
   const [subjectDiv, setSubjectDiv] = useState('')
   const [contentDiv, setContentDiv] = useState('')
@@ -87,7 +86,7 @@ import axios from 'axios';
   }
 
   const isExistSubject = () => {
-    axios.get(`http://localhost:8080/user/isExistSubject?subject=${subject}`)
+    axios.get(`http://localhost:8080/store/isExistSubject?subject=${subject}`)
          .then(res => {
             setSubjectDiv(res.data === 'non_exist' ? '등록 가능' : '등록 불가능')
          })
@@ -114,14 +113,14 @@ import axios from 'axios';
       <h3>
         <Link to='/'>
           {/* <img src="../img/logo.jpg" width="50" height="50" style={{ cursor: 'pointer' }} /> */}
-          <img src={ mainImg } width="100" height="100" style={{ cursor: 'pointer' }} />
+          <img src='../img/logo.jpg' width="100" height="100" style={{ cursor: 'pointer' }} />
         </Link>
         스토어 제품등록
       </h3>
       <hr/>
 
       <form className={ styles.writeForm }>
-        <input type="text" name="seq" value={ seq } width= '100px' />
+        <input type="text" name="seq" value={ seq } onChange={ onInput } width= '100px' />
         <br/>
 
         <table border="1">

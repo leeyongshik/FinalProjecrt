@@ -23,7 +23,7 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void write(StoreDTO storeDTO) {
 		//DB
-		//seq 컬럼이 primary key로 설정되어 있기 때문에
+		//subject 컬럼이 primary key로 설정되어 있기 때문에
 		//똑같은 시퀀스가 없으면 insert로 수행이 되고, 시퀀스가 있으면 update로 수행된다.
 		storeDAO.save(storeDTO);
 	}

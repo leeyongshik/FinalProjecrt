@@ -5,7 +5,7 @@ import axios from 'axios';
 
  const WriteForm = () => {
   const [form, setForm] = useState({
-    seq: '',
+    store_seq: '',
     subject: '',
     subSubject: '',
     simpleContent: '',
@@ -14,7 +14,7 @@ import axios from 'axios';
     country: '',
     img: ''
   })
-  const { seq, subject, subSubject, simpleContent, content, price, country, img } = form //비구조할당
+  const { store_seq, subject, subSubject, simpleContent, content, price, country, img } = form //비구조할당
 
   const [subjectDiv, setSubjectDiv] = useState('')
   const [contentDiv, setContentDiv] = useState('')
@@ -34,6 +34,11 @@ import axios from 'axios';
 
   const onWriteSubmit = (e) => {
     e.preventDefault()
+
+    setSubjectDiv('')
+    setContentDiv('')
+    setPriceDiv('')
+    setCountryDiv('')
 
     const sw = 1
     if(!subject) {
@@ -78,7 +83,7 @@ import axios from 'axios';
         axios.post('http://localhost:8080/store/write', null, { params: form })
              .then(() => {
                 alert('스토어에 품목이 등록되었어요!');
-                navigate('/store/list');
+                navigate('/store/');
             })
              .catch(error => console.log(error))
       
@@ -86,8 +91,8 @@ import axios from 'axios';
   }
 
   const isExistSubject = () => {
-    console.log('seq='+(seq))
-    console.log('subject='+(subject))
+    // console.log('seq='+(seq))
+    // console.log('subject='+(subject))
     axios.get(`http://localhost:8080/store/isExistSubject?subject=${subject}`)
          .then(res => {
             setSubjectDiv(res.data === 'non_exist' ? '등록 가능' : '등록 불가능')
@@ -99,7 +104,7 @@ import axios from 'axios';
     e.preventDefault()
 
     setForm({
-      seq: '',
+      store_seq: '',
       subject: '',
       subSubject: '',
       simpleContent: '',
@@ -122,7 +127,7 @@ import axios from 'axios';
       <hr/>
 
       <form className={ styles.writeForm }>
-        <input type="text" name="seq" value={ seq } onChange={ onInput } width= '100px' />
+        <input type="text" name="store_seq" value={ store_seq } onChange={ onInput } width= '100px' />
         <br/>
         
         <table border="1">

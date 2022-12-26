@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
 import store.bean.StoreDTO;
 import store.service.StoreService;
+import java.io.File;
+import java.io.IOException;
 
 @CrossOrigin
 @RestController //@RestController = @Controller + @ResponseBody
@@ -37,4 +42,23 @@ public class StoreController {
 		return storeService.isExistSubject(subject);
 	}
 	
+	// name="img" 1개 이상일 경우
+	@PostMapping(value = "/imgUpload")
+	@ResponseBody
+	public void upload(@RequestParam MultipartFile img, HttpSession session) {
+		//실제폴더
+		String filePath = session.getServletContext().getRealPath("/public/storage");
+		System.out.println("실제폴더 : "+filePath);
+		String fileName = img.getOriginalFilename();
+		
+		File file = new File(filePath, fileName);
+		
+		try {
+			//FileCopyUtils.copy(upload.getInputStream(), new FileOutputStream(file)); // 가상폴더로 복사한다
+			img.transferTo(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//복사
+	}
 }

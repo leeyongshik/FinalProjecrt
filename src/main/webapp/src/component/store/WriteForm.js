@@ -4,8 +4,10 @@ import styles from '../../css/writeForm.module.css';
 import axios from 'axios';
 
  const WriteForm = () => {
+  const [file, setFile] = useState('')
+
   const [form, setForm] = useState({
-    store_seq: '',
+    
     subject: '',
     subSubject: '',
     simpleContent: '',
@@ -31,6 +33,23 @@ import axios from 'axios';
   }
 
   const navigate = useNavigate()
+
+  const readURL = (input) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(input.files[0]);
+
+    reader.onload = () => {
+      console.log(input.files[0])
+      setForm({
+        ...form,
+        img: input.files[0].name
+      })
+      setFile(input.files[0])
+    }
+  }
+
+  
+
 
   const onWriteSubmit = (e) => {
     e.preventDefault()
@@ -78,6 +97,19 @@ import axios from 'axios';
       }).catch(error => console.log(error))
     */
 
+        var formData = new FormData()
+        
+        formData.append('img', file)
+        console.log(formData)
+    
+        axios.post('http://localhost:8080/store/imgUpload', formData, {
+          headers : {
+            'content-Type' : `multipart/form-data`
+          }
+        })
+            .then()
+            .catch(error => console.log(error))
+
         //두번째
         
         axios.post('http://localhost:8080/store/write', null, { params: form })
@@ -86,6 +118,9 @@ import axios from 'axios';
                 navigate('/store/');
             })
              .catch(error => console.log(error))
+             
+             
+        
       
     }
   }
@@ -104,7 +139,7 @@ import axios from 'axios';
     e.preventDefault()
 
     setForm({
-      store_seq: '',
+      
       subject: '',
       subSubject: '',
       simpleContent: '',
@@ -127,7 +162,7 @@ import axios from 'axios';
       <hr/>
 
       <form className={ styles.writeForm }>
-        <input type="text" name="store_seq" value={ store_seq } onChange={ onInput } width= '100px' />
+        
         <br/>
         
         <table border="1">
@@ -183,7 +218,7 @@ import axios from 'axios';
             <tr>
               <td width="50px" align="center">첨부이미지</td>
               <td>
-                <input type="text" name="img" value={ img } onChange={ onInput } width= '120px' />
+                <input type="file" name='img' onChange={e => readURL(e.target)} />
               </td>
             </tr>
             

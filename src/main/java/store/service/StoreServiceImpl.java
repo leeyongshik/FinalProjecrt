@@ -31,7 +31,7 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public String isExistSubject(String subject) {
 		//DB
-		Optional<StoreDTO> storeDTO = storeDAO.findById(subject);
+		Optional<StoreDTO> storeDTO = storeDAO.findBySubject(subject);
 		System.out.println(storeDTO); //값이 없으면 Optional.empty
 		
 		if(storeDTO.isPresent()) //값이 없으면 false

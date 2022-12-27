@@ -2,9 +2,31 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../css/writeForm.module.css';
 import axios from 'axios';
+import Select from 'react-select';
 
  const WriteForm = () => {
   const [file, setFile] = useState('')
+
+
+
+  
+
+
+  
+
+
+
+  const online = [
+    { value: "combo", label: "콤보" },
+    { value: "popcorn", label: "팝콘" },
+    { value: "drink", label: "음료" },
+    { value: "snack", label: "스낵" },
+   ] //원래는 select 태그 안에 들어가는 애들을 배열로 만들어준다.
+   
+   const [selectOnline, setSelectOnline] = useState(online[0]);
+   //안에 들어가는 값을 받아야해서 state사용
+
+
 
   const [form, setForm] = useState({
     category: '',
@@ -25,6 +47,7 @@ import axios from 'axios';
 
   const onInput = (e) => {
     const { name, value } = e.target
+    console.log(e.target.value)
 
     setForm({
       ...form,
@@ -139,7 +162,7 @@ import axios from 'axios';
     e.preventDefault()
 
     setForm({
-      category: '',
+      category2: '',
       subject: '',
       subSubject: '',
       simpleContent: '',
@@ -149,6 +172,10 @@ import axios from 'axios';
       img: ''
     })
   }
+
+  const [selected, setSelected] = React.useState("");
+
+
 
   return (
     <div>
@@ -164,12 +191,17 @@ import axios from 'axios';
       <form className={ styles.writeForm }>
         
         <br/>
-        <select name="category" onChange={ onInput }>
-          <option key="combo" value={ category }>콤보</option>
-          <option key="popcorn" value={ category }>팝콘</option>
-          <option key="drink" value={ category }>음료</option>
-          <option key="snack" value={ category }>스낵</option>
+        <select onChange={onInput} name="category">
+          <option>----- 카테고리를 선택해주세요 -----</option>
+          <option value="combo">콤보</option>
+          <option value="popcorn">팝콘</option>
+          <option value="drink">음료</option>
+          <option value="snack">스낵</option>
         </select>
+        
+        <Select options={online} onChange={setSelected} defaultValue={online[0]} /> 
+
+
         <table border="1">
           <thead>
             <tr>

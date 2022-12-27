@@ -45,7 +45,7 @@ public class StoreDTO {
 	@Column(name="img")
 	private String img; 
 	
-	@Column(name="category", nullable = false)
+	@Column(name="category", nullable = false, length = 30)
 	private String category;
 	
 }

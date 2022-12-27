@@ -49,7 +49,7 @@ const View = () => {
                             </div>
                         </div>
                         <div className={viewStyles.category_product_detail_btn_wrap}>
-                            <a href="#" onclick="javascript:app.goLogin();return false;" className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'30pt'}}>장바구니</a>
+                            <a href="#" onclick="javascript:app.goLogin();return false;" className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
                             <a href="#" onclick="javascript:app.goLogin(); return false;">선물하기</a>
                             <a href="#" onclick="javascript:app.goLogin();return false;">구매하기</a>
                         </div>

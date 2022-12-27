@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../css/writeForm.module.css';
 import axios from 'axios';
-import Select from 'react-select';
 
  const WriteForm = () => {
   const [file, setFile] = useState('')
@@ -162,7 +161,7 @@ import Select from 'react-select';
     e.preventDefault()
 
     setForm({
-      category2: '',
+      category: '',
       subject: '',
       subSubject: '',
       simpleContent: '',
@@ -197,10 +196,7 @@ import Select from 'react-select';
           <option value="popcorn">팝콘</option>
           <option value="drink">음료</option>
           <option value="snack">스낵</option>
-        </select>
-        
-        <Select options={online} onChange={setSelected} defaultValue={online[0]} /> 
-
+        </select> 
 
         <table border="1">
           <thead>

@@ -40,4 +40,10 @@ public class StoreServiceImpl implements StoreService {
 			return "non_exist";
 	}
 
+	@Override
+	public List<StoreDTO> getPopcornList(String category) {
+		//DB
+		return storeDAO.findByPopcorn(category);
+	}
+
 }

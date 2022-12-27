@@ -12,4 +12,6 @@ public interface StoreService {
 
 	public String isExistSubject(String subject);
 
+	public List<StoreDTO> getPopcornList(String category);
+
 }

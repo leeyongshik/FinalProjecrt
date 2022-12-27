@@ -31,6 +31,12 @@ public class StoreController {
 		return storeService.getStoreList();
 	}
 	
+	@GetMapping(path = "getPopcornList")
+	public List<StoreDTO> getPopcornList(@RequestParam String category) {
+		System.out.println(category);
+		return storeService.getPopcornList(category);
+	}
+	
 	@PostMapping(path = "write")
 	public void write(@ModelAttribute StoreDTO storeDTO) {
 		storeService.write(storeDTO);

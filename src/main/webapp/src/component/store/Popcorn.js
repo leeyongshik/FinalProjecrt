@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import popcornStyles from '../../css/Popcorn.module.css'
 
 const StorePopcone = () => {
@@ -11,7 +12,7 @@ const StorePopcone = () => {
                 </strong>
                 <ul className={popcornStyles.com_list_style}>
                     <li className="">
-                        <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100332" className={popcornStyles.btn_category_product}>
+                        <Link to="/store/view" className={popcornStyles.btn_category_product}>
                             <span className={popcornStyles.com_list_img_wrap}>
                                 <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16680685701470.jpg" alt="더블치즈팝콘(M)"/>
                             </span>
@@ -22,7 +23,7 @@ const StorePopcone = () => {
                                     <span className={popcornStyles.store_deatail_source_price}>6,000</span>
                                 </span>
                             </span>
-                        </a>
+                        </Link>
                         <a href="#none" onclick="javascript:fnMoveLink('1', '100332', '0', ''); return false;" className={popcornStyles.btn_category_product_cart}>1</a>
                         <a href="#none" onclick="javascript:fnMoveLink('2', '100332', 0, '1'); return false;" className={popcornStyles.btn_category_product_gift}>2</a>
                         <a href="#none" onclick="javascript:fnMoveLink('3', '100332', 0, '1'); return false;" className={popcornStyles.btn_category_product_buy}>3</a>

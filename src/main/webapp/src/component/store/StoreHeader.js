@@ -15,16 +15,16 @@ const StoreHeader = () => {
                             <a href="#" onclick="javascript:fnCategoryData('3');">기프트카드</a>
                         </li>
                         <li id="cm4" name="categorymenu" className="">
-                            <Link to='combo'>콤보</Link>
+                            <Link to='/store/combo'>콤보</Link>
                         </li>
                         <li id="cm5" name="categorymenu" className="">
-                            <Link to='popcorn'>팝콘</Link>
+                            <Link to='/store/popcorn'>팝콘</Link>
                         </li>
                         <li id="cm6" name="categorymenu" className="">
-                            <Link to='drink'>음료</Link>
+                            <Link to='/store/drink'>음료</Link>
                         </li>
                         <li id="cm7" name="categorymenu" className="">
-                            <Link to='snack'>스낵</Link>
+                            <Link to='/store/snack'>스낵</Link>
                         </li>
                         <li id="cm10" name="categorymenu" className="">
                             <a href="#" onclick="javascript:fnCategoryData('10');">플레이존</a>

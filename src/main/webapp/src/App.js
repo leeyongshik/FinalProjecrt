@@ -4,6 +4,7 @@ import Index from './component/main/Index';
 import List from './component/store/List';
 import StoreIndex from './component/store/Index';
 import WriteForm from './component/store/WriteForm';
+import View from './component/store/View';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path='/' element={<Index/>}></Route>
           <Route path='/store/writeForm' element={<WriteForm/>}></Route>
           <Route path='/store/*' element={<List/>}></Route>
+          <Route path='/store/view' element={<View/>}></Route>
 
         </Routes>
       </>

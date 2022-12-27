@@ -7,7 +7,7 @@ import axios from 'axios';
   const [file, setFile] = useState('')
 
   const [form, setForm] = useState({
-    
+    category: '',
     subject: '',
     subSubject: '',
     simpleContent: '',
@@ -16,7 +16,7 @@ import axios from 'axios';
     country: '',
     img: ''
   })
-  const { store_seq, subject, subSubject, simpleContent, content, price, country, img } = form //비구조할당
+  const { category, subject, subSubject, simpleContent, content, price, country, img } = form //비구조할당
 
   const [subjectDiv, setSubjectDiv] = useState('')
   const [contentDiv, setContentDiv] = useState('')
@@ -139,7 +139,7 @@ import axios from 'axios';
     e.preventDefault()
 
     setForm({
-      
+      category: '',
       subject: '',
       subSubject: '',
       simpleContent: '',
@@ -164,7 +164,12 @@ import axios from 'axios';
       <form className={ styles.writeForm }>
         
         <br/>
-        
+        <select name="category" onChange={ onInput }>
+          <option key="combo" value={ category }>콤보</option>
+          <option key="popcorn" value={ category }>팝콘</option>
+          <option key="drink" value={ category }>음료</option>
+          <option key="snack" value={ category }>스낵</option>
+        </select>
         <table border="1">
           <thead>
             <tr>

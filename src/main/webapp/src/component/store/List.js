@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../css/List.module.css'
+import styles from '../../css/List.module.css';
 import { BrowserRouter, Router, Link, Route, Routes } from "react-router-dom";
 import Index from './Index';
 import Popcorn from './Popcorn';
@@ -7,6 +7,7 @@ import Drink from './Drink';
 import Snack from './Snack';
 import Combo from './Combo';
 import StoreHeader from './StoreHeader';
+import topButtonStyles from '../../css/TopButton.module.css';
 
 const List = () => {
     return (
@@ -41,8 +42,12 @@ const List = () => {
                 <Route path="/snack" element={<Snack />}></Route>
             </Routes>
 
-
-
+            <div className={topButtonStyles.fixedBtn_wrap }> {/* topButtonStyles.topBtn */}
+                <a href="/ticket/" className={topButtonStyles.btn_fixedTicketing}>예매하기</a>
+                <a href="#none" className={topButtonStyles.btn_gotoTop}>
+                    <img src="../img/gotoTop.png" alt="최상단으로 이동" />
+                </a>
+            </div>
             
         </div>
     );

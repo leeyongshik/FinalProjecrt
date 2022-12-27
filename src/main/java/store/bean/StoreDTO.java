@@ -24,7 +24,6 @@ public class StoreDTO {
 	@Column(name="store_seq")
 	private int store_seq;
 	
-	
 	@Column(name="subject", nullable = false, unique = true, length = 30)
 	private String subject;
 	
@@ -45,5 +44,8 @@ public class StoreDTO {
 	
 	@Column(name="img")
 	private String img; 
+	
+	@Column(name="category", nullable = false)
+	private String category;
 	
 }

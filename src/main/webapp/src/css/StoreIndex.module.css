@@ -109,6 +109,18 @@ ol, ul {
     padding-left: 0;
     transform: none;
 }
+.category_product_inner_list li .btn_category_product .best_product_text_wrap {
+    position: absolute;
+    top: 50%;
+    width: 280px;
+    padding-left: 20px;
+    font-family: 'CJONLYONENEW';
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+}
 .category_product_list > li:first-child .category_product_inner_list li .btn_category_product .best_product_text_wrap .best_product_text_title {
     margin-top: 20px;
 }

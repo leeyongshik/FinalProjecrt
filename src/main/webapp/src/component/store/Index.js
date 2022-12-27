@@ -74,7 +74,7 @@ const StoreIndex = () => {
                     </li>
                     <li>
                         <strong className={indexStyles.category_product_title}>기프트카드
-                            <a href="#" className={indexStyles.btn_category_product}>더보기</a>
+                            <a href="#" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
                             <li className={indexStyles.state_giftcard}>
@@ -127,7 +127,7 @@ const StoreIndex = () => {
                     </li>
                     <li>
                         <strong className={indexStyles.category_product_title}>음료
-                            <a href="/culture-event/popcorn-store/store-category.aspx?CategoryIdx=6" className={indexStyles.btn_category_product}>더보기</a>
+                            <a href="/culture-event/popcorn-store/store-category.aspx?CategoryIdx=6" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
                             <li className="">
@@ -185,7 +185,7 @@ const StoreIndex = () => {
                     </li>
                     <li>
                         <strong className={indexStyles.category_product_title}>스낵
-                            <a href="/culture-event/popcorn-store/store-category.aspx?CategoryIdx=7" className={indexStyles.btn_category_product}>더보기</a>
+                            <a href="/culture-event/popcorn-store/store-category.aspx?CategoryIdx=7" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className="category_product_inner_list">
                             <li className=" ">
@@ -238,6 +238,71 @@ const StoreIndex = () => {
                                 <a href="#none" onclick="javascript:fnMoveLink('1', '100015', '0', ''); return false;" className={indexStyles.btn_category_product_cart}>1</a>
                                 <a href="#none" onclick="javascript:fnMoveLink('2', '100015', '0', '1'); return false;" className={indexStyles.btn_category_product_gift}>2</a>
                                 <a href="#none" onclick="javascript:fnMoveLink('3', '100015', '0', '1'); return false;" className={indexStyles.btn_category_product_buy}>3</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+                    <li>
+                        <strong className={indexStyles.category_product_title}>스낵
+                            <a href="/culture-event/popcorn-store/store-category.aspx?CategoryIdx=7" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
+                        </strong>
+                        <ul className={indexStyles.category_product_inner_list}>
+                            <li className="">
+                                <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100017" className={indexStyles.btn_category_product}>
+                                    <span className={indexStyles.best_product_img_wrap}>
+                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15459092398190.jpg" alt="칠리치즈나쵸"/>
+                                    </span>
+                                    <span className={indexStyles.best_product_text_wrap}>
+                                        <span className={indexStyles.best_product_text_title}>칠리치즈나쵸</span>
+                                        <span className={indexStyles.best_product_text_name}>바삭바삭 나쵸, 얼마나 맛있게요?</span>
+                                        <span className={indexStyles.best_product_sale_price_wrap}>
+                                            <span className={indexStyles.store_deatail_source_price}>4,900</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <a href="#none" onclick="javascript:fnMoveLink('1', '100017', '0', ''); return false;" className={indexStyles.btn_category_product_cart}>1</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('2', '100017', '0', '1'); return false;" className={indexStyles.btn_category_product_gift}>2</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('3', '100017', '0', '1'); return false;" className={indexStyles.btn_category_product_buy}>3</a>
+                            </li>
+                            <li className=" ">
+                                <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100092" className="btn_category_product">
+                                    <span className="best_product_img_wrap">
+                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15464120856450.jpg" alt="플레인핫도그"/>
+                                    </span>
+                                    <span className="best_product_text_wrap">
+                                        <span className="best_product_text_title">플레인핫도그</span>
+                                        <span className="best_product_text_name">플레인핫도그</span>
+                                        <span className="best_product_sale_price_wrap">
+                                            <span className="store_deatail_source_price">4,500</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <a href="#none" onclick="javascript:fnMoveLink('1', '100092', '0', ''); return false;" className="btn_category_product_cart">1</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('2', '100092', '0', '1'); return false;" className="btn_category_product_gift">2</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('3', '100092', '0', '1'); return false;" className="btn_category_product_buy">3</a>
+                            </li>
+                            <li className=" ">
+                                <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100015" className="btn_category_product">
+                                    <span className="best_product_img_wrap">
+                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15459089330830.jpg" alt="오징어(완제품)"/>
+                                    </span>
+                                    <span className="best_product_text_wrap">
+                                        <span className="best_product_text_title">오징어(완제품)</span>
+                                        <span className="best_product_text_name">한봉지로는 모자라요</span>
+                                        <span className="best_product_sale_price_wrap">
+                                            <span className="store_deatail_source_price">3,500</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <a href="#none" onclick="javascript:fnMoveLink('1', '100015', '0', ''); return false;" className="btn_category_product_cart">1</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('2', '100015', '0', '1'); return false;" className="btn_category_product_gift">2</a>
+                                <a href="#none" onclick="javascript:fnMoveLink('3', '100015', '0', '1'); return false;" className="btn_category_product_buy">3</a>
                             </li>
                         </ul>
                     </li>

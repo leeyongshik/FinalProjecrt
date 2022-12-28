@@ -27,7 +27,7 @@ const StorePopcone = () => {
 
                         return (
                             <li key={ item.store_seq }>
-                                <Link to={`/store/view?store_seq=${ item.store_seq }`} className={popcornStyles.btn_category_product}>
+                                <Link to={`/store/view/${ item.store_seq }`} className={popcornStyles.btn_category_product}>
                                     <span className={popcornStyles.com_list_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>
                                     </span>

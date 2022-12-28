@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import viewStyles from '../../css/StoreView.module.css'
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 //초기값
 const initialState = 1
@@ -20,9 +21,10 @@ const reducer = (state, action) => {
 
 const View = () => {
     const [count, dispatch] = useReducer(reducer, initialState)
+    const params = useParams().store_seq;
 
-    const [store_seq, setStore_seq] = useState(23)
-    const [endPrice, setEndPrice] = useState(0)
+    const [store_seq, setStore_seq] = useState(params)
+    const [endPrice, setEndPrice] = useState('')
     const [data, setData] = useState({
         subject: '',
         price: '',
@@ -37,8 +39,13 @@ const View = () => {
         axios.get(`http://localhost:8080/store/getStore?store_seq=${store_seq}`)
              .then(res => setData(res.data))
              .catch(error => console.log(error))
-      }, [])
+        }, [])
 
+    useEffect(() => {
+        setEndPrice(count*price)
+    }, [count])
+    
+      
 
     return (
         <>
@@ -50,7 +57,7 @@ const View = () => {
                     <div className={viewStyles.category_product_detail_contents_img_wrap}>
                         <ul className={viewStyles.bxslider}>
                             <li>
-                                <img src={`../storage/${ img }`} alt={ subject }/>
+                                <img src={`../../storage/${ img }`} alt={ subject }/>
                             </li>
                         </ul>
                     </div>
@@ -75,11 +82,11 @@ const View = () => {
                                 <a href="#none" onClick={ () => count>1 ? dispatch({ type: 'DECREMENT' }) : alert('1개 미만으로는 선택할 수 없습니다')} className={viewStyles.com_btn_minus} style={{background:' url(/img/dash-lg.svg) no-repeat center', backgroundSize:'12pt'}}>-</a>
                                 <span className={viewStyles.com_form_count}>{ count }</span>
                                 <a href="#none" onClick={ () => dispatch({ type: 'INCREMENT' })} className={viewStyles.com_btn_plus} style={{background:' url(/img/plus.svg) no-repeat center', backgroundSize:'15pt'}}>+</a>
-                                <span className={viewStyles.com_total_price} id="spantotalprice">{ endPrice }</span>
+                                <span className={viewStyles.com_total_price} id="spantotalprice">{count===1 ? price :  endPrice }</span>
                             </div>
                             <div className={viewStyles.category_product_detail_total_price}>
                                 <p className={viewStyles.com_form_total_price}>총 구매금액
-                                    <span className={viewStyles.com_product_total_price}>{ endPrice }</span>
+                                    <span className={viewStyles.com_product_total_price}>{count===1 ? price :  endPrice }</span>
                                 </p>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import store.bean.StoreDTO;
+import store.bean.UserDTO;
 import store.dao.StoreDAO;
 
 @Service
@@ -52,4 +53,10 @@ public class StoreServiceImpl implements StoreService {
 		return storeDAO.findByStore_seq(store_seq);
 	}
 
+	@Override
+	public UserDTO login(UserDTO userDTO) {
+		System.out.println(userDTO.getUserName());
+		return storeDAO.login(userDTO.getUserName(), userDTO.getPassword());
+	}
+	
 }

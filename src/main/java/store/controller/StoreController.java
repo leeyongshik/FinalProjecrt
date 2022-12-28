@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import store.bean.StoreDTO;
+import store.bean.UserDTO;
 import store.service.StoreService;
 import java.io.File;
 import java.io.IOException;
@@ -73,4 +74,10 @@ public class StoreController {
 			e.printStackTrace();
 		}//복사
 	}
+	
+	@PostMapping(path = "login")
+	public UserDTO login(@ModelAttribute UserDTO userDTO) {
+		return storeService.login(userDTO);
+	}
+	
 }

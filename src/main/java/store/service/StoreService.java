@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import store.bean.StoreDTO;
+import store.bean.UserDTO;
 
 public interface StoreService {
 
@@ -16,5 +17,7 @@ public interface StoreService {
 	public Optional<StoreDTO> getStore(int store_seq);
 	
 	public List<StoreDTO> getPopcornList(String category);
+
+	public UserDTO login(UserDTO userDTO);
 
 }

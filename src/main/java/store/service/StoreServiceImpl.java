@@ -46,4 +46,10 @@ public class StoreServiceImpl implements StoreService {
 		return storeDAO.findByPopcorn(category);
 	}
 
+	@Override
+	public Optional<StoreDTO> getStore(int store_seq) {
+		//DB
+		return storeDAO.findByStore_seq(store_seq);
+	}
+
 }

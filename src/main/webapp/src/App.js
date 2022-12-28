@@ -5,6 +5,8 @@ import List from './component/store/List';
 import StoreIndex from './component/store/Index';
 import WriteForm from './component/store/WriteForm';
 import View from './component/store/View';
+import WritreForm2 from './component/store/WritreForm2';
+import StoreCart from './component/store/StoreCart';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
           <Route path='/store/writeForm' element={<WriteForm/>}></Route>
           <Route path='/store/*' element={<List/>}></Route>
           <Route path='/store/view' element={<View/>}></Route>
+          <Route path='/store/writeForm2' element={<WritreForm2/>}></Route>
+          <Route path='/store/cart' element={<StoreCart/>}></Route>
 
         </Routes>
       </>

@@ -190,7 +190,7 @@ import axios from 'axios';
       <form className={ styles.writeForm }>
         
         <br/>
-        <select onChange={onInput} name="category">
+        <select onChange={ onInput } name="category">
           <option>----- 카테고리를 선택해주세요 -----</option>
           <option value="combo">콤보</option>
           <option value="popcorn">팝콘</option>

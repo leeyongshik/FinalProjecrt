@@ -11,12 +11,14 @@ import org.springframework.stereotype.Repository;
 import store.bean.StoreDTO;
 
 @Repository
-public interface StoreDAO extends JpaRepository<StoreDTO, String>{
+public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	
 	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.subject=:subject")
 	public Optional<StoreDTO> findBySubject(@Param("subject") String subject);
 	
 	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.category=:category")
 	public List<StoreDTO> findByPopcorn(@Param("category") String category);
-
+	
+	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.store_seq=:store_seq")
+	public Optional<StoreDTO> findByStore_seq(@Param("store_seq") int store_seq);
 }

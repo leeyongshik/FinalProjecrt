@@ -1,6 +1,7 @@
 package store.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,6 +47,11 @@ public class StoreController {
 	public String isExistSubject(@RequestParam String subject) {
 		System.out.println(subject);
 		return storeService.isExistSubject(subject);
+	}
+	
+	@GetMapping(path = "getStore")
+	public Optional<StoreDTO> getStore(@RequestParam int store_seq) {
+		return storeService.getStore(store_seq);
 	}
 	
 	// name="img" 1개 이상일 경우

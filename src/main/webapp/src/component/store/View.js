@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import viewStyles from '../../css/StoreView.module.css'
+import axios from 'axios';
 
 const View = () => {
-    
+    const [store_seq, setStore_seq] = useState(23)
+    const [data, setData] = useState({
+        subject: '',
+        price: '',
+        subSubject: '',
+        country: '',
+        content: '',
+        img: ''
+    })
+    const { subject, price, subSubject, country, content, img } = data
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getStore?store_seq=${store_seq}`)
+             .then(res => setData(res.data))
+             .catch(error => console.log(error))
+      }, [])
 
 
     return (
@@ -11,28 +27,26 @@ const View = () => {
             <StoreHeader/>
 
             <div className={viewStyles.category_product_detail_wrap}>
-                <strong className={viewStyles.category_product_detail_title}>더블치즈팝콘(M)
-                    <span>기프트콘</span>
-                </strong>
+                <strong className={viewStyles.category_product_detail_title}>{ subject }</strong>
                 <div className={viewStyles.category_product_detail_contents}>
                     <div className={viewStyles.category_product_detail_contents_img_wrap}>
                         <ul className={viewStyles.bxslider}>
                             <li>
-                                <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/Detail/16680685705700.jpg" alt="더블치즈팝콘(M)"/>
+                                <img src="../storage/${ img }" alt={ subject }/>
                             </li>
                         </ul>
                     </div>
                     <div className={viewStyles.category_product_detail_contents_wrap}>
                         <p className={viewStyles.category_product_detail_sale_price_wrap}>
-                            <span className={viewStyles.store_deatail_sale_price} id="spnSalePrice">6,000</span>
+                            <span className={viewStyles.store_deatail_sale_price} id="spnSalePrice">{ price }</span>
                         </p>
                         <dl className={viewStyles.category_product_detail_add_info}>
                             <dt>상품구성</dt>
-                            <dd>더블치즈팝콘(M)</dd>
+                            <dd>{ subSubject }</dd>
                             <dt>유효기간</dt>
                             <dd>구매일로부터 6개월 이내</dd>
                             <dt>원산지</dt>
-                            <dd>팝콘(옥수수: 미국산)</dd>
+                            <dd>{ country }</dd>
                             <dt>상품교환</dt>
                             <dd>
                                 <a href="#none" className={viewStyles.btn_available_viewcgv} onclick="javascript:fnGetTheater(100332);">사용가능 CGV 보기</a>
@@ -58,7 +72,7 @@ const View = () => {
                         </div>
                     </div>
                 </div>
-                <p className={viewStyles.category_product_detail_txtbox}>치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!</p>
+                <p className={viewStyles.category_product_detail_txtbox}>{ content }</p>
                 <dl className={viewStyles.category_product_detail_dlist}>
                     <dt>이용안내</dt>
                     <dd>

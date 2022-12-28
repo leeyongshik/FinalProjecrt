@@ -22,7 +22,7 @@ const View = () => {
     const [count, dispatch] = useReducer(reducer, initialState)
 
     const [store_seq, setStore_seq] = useState(23)
-    const [endPrice, setEndPrice] = useState(price)
+    const [endPrice, setEndPrice] = useState(0)
     const [data, setData] = useState({
         subject: '',
         price: '',
@@ -50,7 +50,7 @@ const View = () => {
                     <div className={viewStyles.category_product_detail_contents_img_wrap}>
                         <ul className={viewStyles.bxslider}>
                             <li>
-                                <img src="../storage/${ img }" alt={ subject }/>
+                                <img src={`../storage/${ img }`} alt={ subject }/>
                             </li>
                         </ul>
                     </div>
@@ -72,7 +72,7 @@ const View = () => {
                         </dl>
                         <div className={viewStyles.category_product_detail_price_wrap}>
                             <div className={viewStyles.com_form_number}>
-                                <a href="#none" onClick={ () => dispatch({ type: 'DECREMENT' })} className={viewStyles.com_btn_minus} style={{background:' url(/img/dash-lg.svg) no-repeat center', backgroundSize:'12pt'}}>-</a>
+                                <a href="#none" onClick={ () => count>1 ? dispatch({ type: 'DECREMENT' }) : alert('1개 미만으로는 선택할 수 없습니다')} className={viewStyles.com_btn_minus} style={{background:' url(/img/dash-lg.svg) no-repeat center', backgroundSize:'12pt'}}>-</a>
                                 <span className={viewStyles.com_form_count}>{ count }</span>
                                 <a href="#none" onClick={ () => dispatch({ type: 'INCREMENT' })} className={viewStyles.com_btn_plus} style={{background:' url(/img/plus.svg) no-repeat center', backgroundSize:'15pt'}}>+</a>
                                 <span className={viewStyles.com_total_price} id="spantotalprice">{ endPrice }</span>

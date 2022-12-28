@@ -9,7 +9,7 @@ const StoreCart = () => {
 
             <div className={cartStyles.cart_step_wrap}>
 		        <ul className={cartStyles.cart_step}>
-			        <li className={cartStyles.step0}>
+			        <li className={cartStyles.active}>
                         <span>STEP 01</span>
                         <strong>장바구니</strong>
                     </li>
@@ -37,7 +37,7 @@ const StoreCart = () => {
 			        <input type="checkbox" id="checkboxall" className={cartStyles.com_custom_checkbox} checked="checked"/>
 			        <label for="checkboxall">전체선택</label>
 			        <strong className={cartStyles.com_custom_checkbox_product_name}>상품명</strong>
-			        <strong className={cartStyles.stcom_custom_checkbox_sel_priceep0}>판매금액</strong>
+			        <strong className={cartStyles.com_custom_checkbox_sel_price}>판매금액</strong>
 			        <strong className={cartStyles.com_custom_checkbox_cnt}>수량</strong>
 			        <strong className={cartStyles.com_custom_checkbox_price}>구매금액</strong>
 			        <strong className={cartStyles.com_custom_checkbox_product_sel}>선택</strong>

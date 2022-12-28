@@ -9,6 +9,7 @@ const Index = () => {
             <hr></hr>
             <p><Link to='/store/writeForm'>글쓰기</Link></p>
             <p><Link to='/store'>리스트</Link></p>
+            <p><Link to='/store/writeForm2'>글쓰기2</Link></p>
         </div>
         </div>
     );

@@ -3,14 +3,7 @@ import StoreHeader from './StoreHeader';
 import viewStyles from '../../css/StoreView.module.css'
 
 const View = () => {
-    const [store_seq, setStore_seq] = useState('')
-    const [subject, setSubject] = useState('')
-
-    useEffect(() => {
-        axios.get(`http://localhost:8080/store/getStore?store_seq=${store_seq}`)
-             .then(res => setList(res.data))
-             .catch(error => console.log(error))
-      }, [])
+    
 
 
     return (
@@ -18,7 +11,7 @@ const View = () => {
             <StoreHeader/>
 
             <div className={viewStyles.category_product_detail_wrap}>
-                <strong className={viewStyles.category_product_detail_title}>{ subject }
+                <strong className={viewStyles.category_product_detail_title}>더블치즈팝콘(M)
                     <span>기프트콘</span>
                 </strong>
                 <div className={viewStyles.category_product_detail_contents}>

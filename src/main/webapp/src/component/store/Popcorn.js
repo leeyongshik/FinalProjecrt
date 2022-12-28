@@ -24,25 +24,26 @@ const StorePopcone = () => {
 
                 {
                     list.map(item => {
-                    return (
-                        <li key={ item.store_seq }>
-                            <Link to="/store/view?store_seq={ item.store_seq }" className={popcornStyles.btn_category_product}>
-                                <span className={popcornStyles.com_list_img_wrap}>
-                                    <img src="../storage/{ item.img }" alt={ item.subject }/>
-                                </span>
-                                <span className={popcornStyles.com_list_text_wrap}>
-                                    <span className={popcornStyles.com_list_text_title}>{ item.subject }</span>
-                                    <span className={popcornStyles.com_list_text_name}>{ item.subSubject }</span>
-                                    <span className={popcornStyles.com_list_sale_price_wrap}>
-                                        <span className={popcornStyles.store_deatail_source_price}>{ item.price }</span>
+
+                        return (
+                            <li key={ item.store_seq }>
+                                <Link to={`/store/view?store_seq=${ item.store_seq }`} className={popcornStyles.btn_category_product}>
+                                    <span className={popcornStyles.com_list_img_wrap}>
+                                        <img src={`../storage/${ item.img }`} alt={ item.subject }/>
                                     </span>
-                                </span>
-                            </Link>
-                        <a href="#none" onclick="javascript:fnMoveLink('1', '100332', '0', ''); return false;" className={popcornStyles.btn_category_product_cart}>1</a>
-                        <a href="#none" onclick="javascript:fnMoveLink('2', '100332', 0, '1'); return false;" className={popcornStyles.btn_category_product_gift}>2</a>
-                        <a href="#none" onclick="javascript:fnMoveLink('3', '100332', 0, '1'); return false;" className={popcornStyles.btn_category_product_buy}>3</a>
-                        </li>
-                    )
+                                    <span className={popcornStyles.com_list_text_wrap}>
+                                        <span className={popcornStyles.com_list_text_title}>{ item.subject }</span>
+                                        <span className={popcornStyles.com_list_text_name}>{ item.subSubject }</span>
+                                        <span className={popcornStyles.com_list_sale_price_wrap}>
+                                            <span className={popcornStyles.store_deatail_source_price}>{ item.price }</span>
+                                        </span>
+                                    </span>
+                                </Link>
+                            <a href="#" className={popcornStyles.btn_category_product_cart} style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>1</a>
+                            <a href="#" className={popcornStyles.btn_category_product_gift}>2</a>
+                            <a href="#" className={popcornStyles.btn_category_product_buy}>3</a>
+                            </li>
+                        )
                     })
                 }
 

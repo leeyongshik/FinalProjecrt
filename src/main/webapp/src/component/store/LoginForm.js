@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [form, setForm] = useState({
@@ -19,12 +19,27 @@ const LoginForm = () => {
     })
   }
 
-  const onLoginSubmit = (e) => {
+  const onLogin = (e) => {
     e.preventDefault()
 
     axios.post('http://localhost:8080/store/login', null, { params: form })
          .then(sessionStorage.setItem('userName', userName))
          .catch(error => console.log(error))
+  }
+
+  const navigate = useNavigate()
+
+  const onLogout = (e) => {
+    e.preventDefault()
+
+    axios.post('http://localhost:8080/store/login', null, { params: form })
+         .then(() => {
+          alert('로그아웃 되었어요!');
+          sessionStorage.removeItem('userName', userName);
+          navigate('/store/');
+         })
+         .catch(error => console.log(error))
+
   }
 
   return (
@@ -39,11 +54,12 @@ const LoginForm = () => {
       <hr/>
 
       <form>
-        <input type="text" name="userName" value={ userName } onChange={ onInput } width= '120px' />
+        아이디 : <input type="text" name="userName" value={ userName } onChange={ onInput } width= '120px' />
         <br/>
-        <input type="password" name="password" value={ password } onChange={ onInput } width= '120px' />
-        <br/>
-        <button onClick={ onLoginSubmit }>스토어로그인</button>
+        비밀번호 : <input type="password" name="password" value={ password } onChange={ onInput } width= '120px' />
+        <br/><br/>
+        <button onClick={ onLogin }>스토어로그인</button>
+        <button onClick={ onLogout }>로그아웃</button>
       </form>
     </div>
   );

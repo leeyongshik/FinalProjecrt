@@ -43,7 +43,7 @@ const StorePopcone = () => {
 
                             e.preventDefault()
                             sessionStorage.getItem("userName") === null ? 
-                                alert('로그인이 필요합니다.') || navigate('/store/loginForm') : 
+                                alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
                                 
                                 
                                   

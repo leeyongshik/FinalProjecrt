@@ -76,11 +76,13 @@ public class StoreController {
 		}//복사
 	}
 	
+	//usertable 이용
 	@PostMapping(path = "login")
 	public UserDTO login(@ModelAttribute UserDTO userDTO) {
 		return storeService.login(userDTO);
 	}
 	
+	//carttable 이용
 	@PostMapping(path = "insertCart")
 	public void insertCart(@ModelAttribute CartDTO cartDTO) {
 		storeService.insertCart(cartDTO);

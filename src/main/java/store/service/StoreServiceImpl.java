@@ -59,13 +59,11 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public UserDTO login(UserDTO userDTO) {
-		System.out.println(userDTO.getUserName());
 		return storeDAO.login(userDTO.getUserName(), userDTO.getPassword());
 	}
 
 	@Override
 	public void insertCart(CartDTO cartDTO) {
-		System.out.println(cartDTO.getImg());
 		cartDAO.save(cartDTO);
 	}
 	

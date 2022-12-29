@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import viewStyles from '../../css/StoreView.module.css'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 //초기값
 const initialState = 1
@@ -44,8 +44,42 @@ const View = () => {
     useEffect(() => {
         setEndPrice(count*price)
     }, [count])
+
+    const [cart, setCart] = useState({
+        count : '',
+        img : '',
+        price : '',
+        store_seq : '',
+        subSubject : '',
+        subject : '',
+        userName : ''
+    })
     
-      
+    const navigate = useNavigate()
+
+    const goToCart = (e) => {
+        e.preventDefault()
+        sessionStorage.getItem("userName") === null ? 
+            alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
+
+
+        axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                count : count,
+                img : img,
+                price : price,
+                store_seq : store_seq,
+                subSubject : subSubject,
+                subject : subject,
+                userName : sessionStorage.getItem("userName")
+            }}
+        )
+             .then(alert('장바구니에 상품이 담겼습니다.\n장바구니 페이지로 이동합니다.') || navigate('/store/cart'))
+             .catch(error => console.log(error)) 
+             
+             
+
+             
+    }
 
     return (
         <>
@@ -91,9 +125,9 @@ const View = () => {
                             </div>
                         </div>
                         <div className={viewStyles.category_product_detail_btn_wrap}>
-                            <a href="#" onclick="javascript:app.goLogin();return false;" className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
-                            <a href="#" onclick="javascript:app.goLogin(); return false;">선물하기</a>
-                            <a href="#" onclick="javascript:app.goLogin();return false;">구매하기</a>
+                            <a href="#" onClick={ goToCart } className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
+                            <a href="#" onClick="javascript:app.goLogin(); return false;">선물하기</a>
+                            <a href="#" onClick="javascript:app.goLogin();return false;">구매하기</a>
                         </div>
                     </div>
                 </div>

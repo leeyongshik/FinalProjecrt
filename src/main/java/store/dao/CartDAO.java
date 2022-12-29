@@ -13,6 +13,6 @@ import store.bean.StoreDTO;
 @Repository
 public interface CartDAO extends JpaRepository<CartDTO, Long> {
 	
-	@Query("select cartDTO from CartDTO cartDTO where cartDTO.username=:username")
-	public Optional<StoreDTO> findBySubject(@Param("subject") String subject);
+//	@Query("select cartDTO from CartDTO cartDTO where cartDTO.username=:username")
+//	public Optional<StoreDTO> findBySubject(@Param("subject") String subject);
 }

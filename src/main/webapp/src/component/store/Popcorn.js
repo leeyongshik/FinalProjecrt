@@ -72,7 +72,7 @@ const StorePopcone = () => {
                                         <span className={popcornStyles.com_list_text_title}>{ item.subject }</span>
                                         <span className={popcornStyles.com_list_text_name}>{ item.subSubject }</span>
                                         <span className={popcornStyles.com_list_sale_price_wrap}>
-                                            <span className={popcornStyles.store_deatail_source_price}>{ item.price }</span>
+                                            <span className={popcornStyles.store_deatail_source_price}><span className={popcornStyles.store_deatail_source_price}>{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></span>
                                         </span>
                                     </span>
                                 </Link>

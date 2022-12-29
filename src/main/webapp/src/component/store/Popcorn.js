@@ -1,17 +1,28 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import popcornStyles from '../../css/Popcorn.module.css'
 
 const StorePopcone = () => {
     const [list, setList] = useState([])
     const [popcorn, setPopcorn] = useState('popcorn')
+    const [userName, setUserName] = useState('')
+    const navigate = useNavigate()
 
   useEffect(() => {
+    
+    console.log(sessionStorage.getItem("userName"))
+    
     axios.get(`http://localhost:8080/store/getPopcornList?category=${popcorn}`)
          .then(res => setList(res.data))
          .catch(error => console.log(error))
-  }, [])
+    
+    }, [])
+
+    const goToCart = (e) => {
+        e.preventDefault()
+        sessionStorage.getItem("userName") === null ? alert('로그인이 필요합니다.') : navigate('/store/cart');
+    }
 
     return (
         <>
@@ -39,7 +50,7 @@ const StorePopcone = () => {
                                         </span>
                                     </span>
                                 </Link>
-                            <a href="#" className={popcornStyles.btn_category_product_cart} style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>1</a>
+                            <a href="#" className={popcornStyles.btn_category_product_cart} onClick={ goToCart } style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>1</a>
                             <a href="#" className={popcornStyles.btn_category_product_gift}>2</a>
                             <a href="#" className={popcornStyles.btn_category_product_buy}>3</a>
                             </li>

@@ -23,7 +23,7 @@ const LoginForm = () => {
     e.preventDefault()
 
     axios.post('http://localhost:8080/store/login', null, { params: form })
-         .then(sessionStorage.setItem('userName', userName))
+         .then(res => res.data ==='' ? alert('아이디또는 비밀번호가 다릅니다.'):sessionStorage.setItem('userName', userName))
          .catch(error => console.log(error))
   }
 

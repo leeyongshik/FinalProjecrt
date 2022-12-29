@@ -66,5 +66,17 @@ public class StoreServiceImpl implements StoreService {
 	public void insertCart(CartDTO cartDTO) {
 		cartDAO.save(cartDTO);
 	}
+
+	@Override
+	public String isExistCart(String userName, String store_seq) {
+		//DB
+		Optional<CartDTO> cartDTO = cartDAO.isExistCart(userName, store_seq);
+		System.out.println(store_seq); //값이 없으면 Optional.empty
+		
+		if(cartDTO.isPresent()) //값이 없으면 false
+			return "exist";
+		else
+			return "non_exist";
+	}
 	
 }

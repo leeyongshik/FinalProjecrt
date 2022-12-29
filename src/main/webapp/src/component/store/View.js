@@ -62,19 +62,29 @@ const View = () => {
         sessionStorage.getItem("userName") === null ? 
             alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
 
+            axios.get('http://localhost:8080/store/isExistCart', {params: {
+                userName : sessionStorage.getItem("userName"),
+                store_seq : store_seq
+            }})
+                 .then(res => res.data === 'exist' ? alert('장바구니에 이미 상품이 담겨있습니다.') 
+                 :
+                 axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                    count : count,
+                    img : img,
+                    price : price,
+                    store_seq : store_seq,
+                    subSubject : subSubject,
+                    subject : subject,
+                    userName : sessionStorage.getItem("userName")
+                }}
+            )
+                 .then(alert('장바구니에 상품이 담겼습니다.\n장바구니 페이지로 이동합니다.') || navigate('/store/cart'))
+                 .catch(error => console.log(error))
+                 )
+                 .catch(error => console.log(error))
 
-        axios.post('http://localhost:8080/store/insertCart', null, {params: {
-                count : count,
-                img : img,
-                price : price,
-                store_seq : store_seq,
-                subSubject : subSubject,
-                subject : subject,
-                userName : sessionStorage.getItem("userName")
-            }}
-        )
-             .then(alert('장바구니에 상품이 담겼습니다.\n장바구니 페이지로 이동합니다.') || navigate('/store/cart'))
-             .catch(error => console.log(error)) 
+                  
+        
              
              
 

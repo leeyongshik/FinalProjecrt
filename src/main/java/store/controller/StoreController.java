@@ -88,4 +88,10 @@ public class StoreController {
 		storeService.insertCart(cartDTO);
 	}
 	
+	@GetMapping(path = "isExistCart")
+	public String isExistCart(@RequestParam String userName, String store_seq) {
+		System.out.println(store_seq);
+		return storeService.isExistCart(userName, store_seq);
+	}
+	
 }

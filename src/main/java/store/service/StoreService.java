@@ -23,4 +23,6 @@ public interface StoreService {
 
 	public void insertCart(CartDTO cartDTO);
 
+	public String isExistCart(String userName, String store_seq);
+
 }

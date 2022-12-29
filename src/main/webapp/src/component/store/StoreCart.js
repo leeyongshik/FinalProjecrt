@@ -151,7 +151,7 @@ const StoreCart = () => {
 
                 <div className={cartStyles.com_btn_wrap }> {/* cartStyles.pT60 */}
                     <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'gift', '');">선물하기</a>
-                    <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'purchase', '');">구매하기</a>
+                    <a href="#none" className={cartStyles.btn_style0 }  >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ package store.service;
 import java.util.List;
 import java.util.Optional;
 
+import store.bean.CartDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 
@@ -19,5 +20,7 @@ public interface StoreService {
 	public List<StoreDTO> getPopcornList(String category);
 
 	public UserDTO login(UserDTO userDTO);
+
+	public void insertCart(CartDTO cartDTO);
 
 }

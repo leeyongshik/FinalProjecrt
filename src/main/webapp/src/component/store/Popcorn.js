@@ -8,21 +8,24 @@ const StorePopcone = () => {
     const [popcorn, setPopcorn] = useState('popcorn')
     const [userName, setUserName] = useState('')
     const navigate = useNavigate()
+    const [cart, setCart] = useState({
+        count : 1,
+        img : '',
+        price : '',
+        store_seq : '',
+        subSubject : '',
+        subject : '',
+        userName : ''
+    })
 
   useEffect(() => {
-    
-    console.log(sessionStorage.getItem("userName"))
-    
     axios.get(`http://localhost:8080/store/getPopcornList?category=${popcorn}`)
          .then(res => setList(res.data))
          .catch(error => console.log(error))
     
     }, [])
 
-    const goToCart = (e) => {
-        e.preventDefault()
-        sessionStorage.getItem("userName") === null ? alert('로그인이 필요합니다.') : navigate('/store/cart');
-    }
+    
 
     return (
         <>
@@ -35,9 +38,32 @@ const StorePopcone = () => {
 
                 {
                     list.map(item => {
+                        
+                        const goToCart = (e) => {
+
+                            e.preventDefault()
+                            sessionStorage.getItem("userName") === null ? 
+                                alert('로그인이 필요합니다.') || navigate('/store/loginForm') : 
+                                
+                                
+                                  
+                            axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                                count : 1,
+                                img : item.img,
+                                price : item.price,
+                                store_seq : item.store_seq,
+                                subSubject : item.subSubject,
+                                subject : item.subject,
+                                userName : sessionStorage.getItem("userName")
+                              }}
+                              )
+                                        .then(res => console.log(res.data))
+                                        .catch(error => console.log(error))
+                                
+                        }
 
                         return (
-                            <li key={ item.store_seq }>
+                            <li key={item.store_seq}>
                                 <Link to={`/store/view/${ item.store_seq }`} className={popcornStyles.btn_category_product}>
                                     <span className={popcornStyles.com_list_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>

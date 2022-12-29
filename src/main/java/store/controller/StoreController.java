@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
+import store.bean.CartDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 import store.service.StoreService;
@@ -78,6 +79,11 @@ public class StoreController {
 	@PostMapping(path = "login")
 	public UserDTO login(@ModelAttribute UserDTO userDTO) {
 		return storeService.login(userDTO);
+	}
+	
+	@PostMapping(path = "insertCart")
+	public void insertCart(@ModelAttribute CartDTO cartDTO) {
+		storeService.insertCart(cartDTO);
 	}
 	
 }

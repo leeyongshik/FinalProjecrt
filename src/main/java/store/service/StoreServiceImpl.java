@@ -6,14 +6,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import store.bean.CartDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
+import store.dao.CartDAO;
 import store.dao.StoreDAO;
 
 @Service
 public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreDAO storeDAO;
+	@Autowired
+	private CartDAO cartDAO;
 
 	@Override
 	public List<StoreDTO> getStoreList() {
@@ -57,6 +61,12 @@ public class StoreServiceImpl implements StoreService {
 	public UserDTO login(UserDTO userDTO) {
 		System.out.println(userDTO.getUserName());
 		return storeDAO.login(userDTO.getUserName(), userDTO.getPassword());
+	}
+
+	@Override
+	public void insertCart(CartDTO cartDTO) {
+		System.out.println(cartDTO.getImg());
+		cartDAO.save(cartDTO);
 	}
 	
 }

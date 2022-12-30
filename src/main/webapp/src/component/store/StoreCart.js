@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import cartStyles from '../../css/StoreCart.module.css'
 import axios from 'axios';
 
+
+
 const StoreCart = () => {
     const [list, setList] = useState([])
+    const [countList, setCountList] = useState([])
 
     useEffect(() => {
     axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
          .then(res => setList(res.data))
          .catch(error => console.log(error))
     
+         axios.get(`http://localhost:8080/store/getCartListCount?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setCountList(res.data))
+         .catch(error => console.log(error))
+         console.log(countList)
     }, [])
+
+    const onDelete = (targetSeq) => {
+        const newList = list.filter((item) => item.cart_seq !== targetSeq);
+        setList(newList);
+        axios.get(`http://localhost:8080/store/deleteCart?cart_seq=${targetSeq}`)
+             .then(alert('선택하신 상품이 삭제되었습니다!'))
+             .catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -23,16 +38,16 @@ const StoreCart = () => {
                         <span>STEP 01</span>
                         <strong>장바구니</strong>
                     </li>
-			        <li className={cartStyles.step1}>
+			        {/* <li className={cartStyles.step1}>
                         <span>STEP 02</span>
                         <strong>선물정보 입력</strong>
-                    </li>
+                    </li> */}
 			        <li className={cartStyles.step2}>
-                        <span>STEP 03</span>
+                        <span>STEP 02</span>
                         <strong>결제하기</strong>
                     </li>
 			        <li className={cartStyles.step3}>
-                        <span>STEP 04</span>
+                        <span>STEP 03</span>
                         <strong>결제완료</strong>
                     </li>
 		        </ul>
@@ -57,7 +72,21 @@ const StoreCart = () => {
                 <ul className={cartStyles.com_list_style1}>
 
                     {
-                    list.map(item => {
+                        
+                    list.map((item, index) => {
+                        const cartPlus = () => {
+                            countList[index] = ++item.count;
+                            setCountList([...countList]);
+                            console.log(countList)
+                        }
+
+                        const cartMinus = () => {
+                            item.count < 2 ? alert('1개 미만으로는 선택할 수 없습니다')
+                            : 
+                            countList[index] = --item.count;
+                            setCountList([...countList]);
+                            console.log(countList)
+                        }
 
                         return (
                             <li className="" id="cart_item_idx_900734" key={ item.cart_seq }>
@@ -75,8 +104,8 @@ const StoreCart = () => {
                         <input type="hidden" id="hid_OrderCnt900734" className={cartStyles.goodscnt} value="1"/>
                         <div className={cartStyles.product_info_cnt_wrap}>
                             <span class={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
-                            <a href="#none" className={cartStyles.com_btn_plus}>+</a>
-                            <a href="#none" className={cartStyles.com_btn_minus}>-</a>
+                            <a href="#none" onClick={ cartPlus } className={cartStyles.com_btn_plus}>+</a>
+                            <a href="#none" onClick={ cartMinus } className={cartStyles.com_btn_minus}>-</a>
                             {/* <a href="#none" className={cartStyles.btn_change}>변경</a> */}
                         </div>
                         <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
@@ -84,7 +113,8 @@ const StoreCart = () => {
                             <a href="#none" >바로구매</a>
                             {/* <a href="#none" >선물하기</a> */}
                         </div>
-                        <a href="javascript:fn_Del('900734')" className={cartStyles.btn_product_delect}>삭제</a>
+                        {/* <a href="javascript:fn_Del('900734')" onClick={ () => onRemove(item.cart_seq) } className={cartStyles.btn_product_delect}>삭제</a> */}
+                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect}>삭제</button>
                     </li>
                         )
                     })
@@ -116,8 +146,8 @@ const StoreCart = () => {
                 </table>
 
                 <div className={cartStyles.com_btn_wrap }> {/* cartStyles.pT60 */}
-                    <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'gift', '');">선물하기</a>
-                    <a href="#none" className={cartStyles.btn_style0 }  >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
+                    {/* <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'gift', '');">선물하기</a> */}
+                    <a href="#none" className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20 }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
                 </div>
             </div>
         </div>

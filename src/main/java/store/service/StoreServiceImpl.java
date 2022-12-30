@@ -84,5 +84,16 @@ public class StoreServiceImpl implements StoreService {
 		//DB
 		return cartDAO.findByCart(userName);
 	}
+
+	@Override
+	public List<Integer> getCartListCount(String userName) {
+		//DB
+		return cartDAO.findByCartCount(userName);
+	}
+
+	@Override
+	public void deleteCart(String cart_seq) {
+		cartDAO.deleteById(cart_seq);
+	}
 	
 }

@@ -78,17 +78,15 @@ const View = () => {
                     userName : sessionStorage.getItem("userName")
                 }}
             )
-                 .then(alert('장바구니에 상품이 담겼습니다.\n장바구니 페이지로 이동합니다.') || navigate('/store/cart'))
+                 .then(alert('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?') || navigate('/store/cart'))
                  .catch(error => console.log(error))
                  )
                  .catch(error => console.log(error))
 
-                  
-        
-             
-             
+    }
 
-             
+    const goToPay = () => {
+        window.location.replace('/store/pay')
     }
 
     return (
@@ -118,7 +116,7 @@ const View = () => {
                             <dd>{ country }</dd>
                             <dt>상품교환</dt>
                             <dd>
-                                <a href="#none" className={viewStyles.btn_available_viewcgv} onclick="javascript:fnGetTheater(100332);">사용가능 CGV 보기</a>
+                                <a href="#none" className={viewStyles.btn_available_viewcgv} onclick="javascript:fnGetTheater(100332);">사용가능 BITBOX 보기</a>
                             </dd>
                         </dl>
                         <div className={viewStyles.category_product_detail_price_wrap}>
@@ -136,8 +134,8 @@ const View = () => {
                         </div>
                         <div className={viewStyles.category_product_detail_btn_wrap}>
                             <a href="#" onClick={ goToCart } className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
-                            <a href="#" onClick="javascript:app.goLogin(); return false;">선물하기</a>
-                            <a href="#" onClick="javascript:app.goLogin();return false;">구매하기</a>
+                            {/* <a href="#" onClick="javascript:app.goLogin(); return false;">선물하기</a> */}
+                            <a href="#" onClick={ goToPay }>구매하기</a>
                         </div>
                     </div>
                 </div>

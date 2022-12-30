@@ -96,4 +96,15 @@ public class StoreController {
 		return storeService.getCartList(userName);
 	}
 	
+	@GetMapping(path = "getCartListCount")
+	public List<Integer> getCartListCount(@RequestParam String userName) {
+		return storeService.getCartListCount(userName);
+	}
+	
+	@GetMapping(path = "deleteCart")
+	public void deleteCart(@RequestParam String cart_seq) {
+		storeService.deleteCart(cart_seq);
+	}
+		
+	
 }

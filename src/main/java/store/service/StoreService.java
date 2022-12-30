@@ -27,4 +27,8 @@ public interface StoreService {
 
 	public List<CartDTO> getCartList(String userName);
 
+	public List<Integer> getCartListCount(String userName);
+
+	public void deleteCart(String cart_seq);
+
 }

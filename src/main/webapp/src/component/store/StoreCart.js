@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import cartStyles from '../../css/StoreCart.module.css'
+import axios from 'axios';
 
 const StoreCart = () => {
+    const [list, setList] = useState([])
+
+    useEffect(() => {
+    axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setList(res.data))
+         .catch(error => console.log(error))
+    
+    }, [])
+
     return (
         <div>
             <StoreHeader/>
@@ -45,84 +55,40 @@ const StoreCart = () => {
 		
         
                 <ul className={cartStyles.com_list_style1}>
-                    <li className="" id="cart_item_idx_900734">
+
+                    {
+                    list.map(item => {
+
+                        return (
+                            <li className="" id="cart_item_idx_900734" key={ item.cart_seq }>
                         <input type="checkbox" id="checkbox900734" name="checkbox" value="900734" className={cartStyles.com_custom_checkbox} checked="checked"/>
                         <label for="checkbox900734"></label>
                         <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100083" className={cartStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16680718728370.jpg" alt="탄산음료(M)"/>
-                            <strong className={cartStyles.product_info_name}>탄산음료(M)</strong>
-                            <span className={cartStyles.product_info_origin} id="spanOriginName900734">탄산음료(M)</span>
+                            <img src={`../storage/${ item.img }`} alt={ item.subject }/>
+                            <strong className={cartStyles.product_info_name}>{ item.subject }</strong>
+                            <span className={cartStyles.product_info_origin} id="spanOriginName900734">{ item.subSubject }</span>
                         </a>
                         <div className={cartStyles.product_info_wrap}>
-                            <span className={cartStyles.product_info_one_price} id="product_info_one_price900734">2,500</span>
+                            <span className={cartStyles.product_info_one_price} id="product_info_one_price900734">{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         </div>
                         <input type="hidden" id="hid_PKAG_CNT" value="1"/>
                         <input type="hidden" id="hid_OrderCnt900734" className={cartStyles.goodscnt} value="1"/>
                         <div className={cartStyles.product_info_cnt_wrap}>
-                            <span class={cartStyles.com_form_count} id="com_form_count900734">1</span>
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900734', null, null, 1, 1, 10)" className={cartStyles.com_btn_plus}>+</a>
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900734', null, null, -1, 1, 10)" className={cartStyles.com_btn_minus}>-</a>
-                            <a href="#none" onClick="javascript:fn_OrderAmountUpdate(900734);" className={cartStyles.btn_change}>변경</a>
+                            <span class={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
+                            <a href="#none" className={cartStyles.com_btn_plus}>+</a>
+                            <a href="#none" className={cartStyles.com_btn_minus}>-</a>
+                            {/* <a href="#none" className={cartStyles.btn_change}>변경</a> */}
                         </div>
-                        <span className={cartStyles.product_info_price} id="totalgoodsprice900734">2,500</span>
+                        <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         <div className={cartStyles.product_info_btn_wrap}>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'purchase', '900734');">바로구매</a>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'gift', '900734');">선물하기</a>
+                            <a href="#none" >바로구매</a>
+                            {/* <a href="#none" >선물하기</a> */}
                         </div>
                         <a href="javascript:fn_Del('900734')" className={cartStyles.btn_product_delect}>삭제</a>
                     </li>
-                    <li class="" id="cart_item_idx_900733">
-                        <input type="checkbox" id="checkbox900733" name="checkbox" value="900733" className={cartStyles.com_custom_checkbox} checked="checked"/>
-                        <label for="checkbox900733"></label>
-                        <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100321" className={cartStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16678058249750.jpg" alt="CGV콤보"/>
-                            <strong className={cartStyles.product_info_name}>CGV콤보</strong>
-                            <span className={cartStyles.product_info_origin} id="spanOriginName900733">팝콘(L)1+탄산음료(M)2</span>
-                        </a>
-                        <div className={cartStyles.product_info_wrap }> {/* cartStyles.not_sale */}
-                            <span className={cartStyles.product_info_one_price} id="product_info_one_price900733">10,000</span>
-                        </div>
-                        <input type="hidden" id="hid_PKAG_CNT" value="1"/>
-                        <input type="hidden" id="hid_OrderCnt900733" className={cartStyles.goodscnt} value="1"/>
-                        <div className={cartStyles.product_info_cnt_wrap}>
-                            <span className={cartStyles.com_form_count} id="com_form_count900733">1</span> {/* cartStyles.com_form_count900733 */}
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900733', null, null, 1, 1, 10)" className={cartStyles.com_btn_plus}>+</a>
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900733', null, null, -1, 1, 10)" className={cartStyles.com_btn_minus}>-</a>
-                            <a href="#none" onClick="javascript:fn_OrderAmountUpdate(900733);" className={cartStyles.btn_change}>변경</a>
-                        </div>
-                        <span className={cartStyles.product_info_price} id="totalgoodsprice900733">10,000</span>
-                        <div className={cartStyles.product_info_btn_wrap}>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'purchase', '900733');">바로구매</a>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'gift', '900733');">선물하기</a>
-                        </div>
-                        <a href="javascript:fn_Del('900733')" className={cartStyles.btn_product_delect}>삭제</a>
-                    </li>
-                    <li class="" id="cart_item_idx_900731">
-                        <input type="checkbox" id="checkbox900731" name="checkbox" value="900731" className={cartStyles.com_custom_checkbox} checked="checked"/>
-                        <label for="checkbox900731"></label>
-                        <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100329" className={cartStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16680650063190.jpg" alt="고소팝콘(M)"/>
-                            <strong className={cartStyles.product_info_name}>고소팝콘(M)</strong>
-                            <span className={cartStyles.product_info_origin} id="spanOriginName900731">고소팝콘(M)</span>
-                        </a>
-                        <div className={cartStyles.product_info_wrap }> {/* cartStyles.not_sale */}
-                            <span className={cartStyles.product_info_one_price} id="product_info_one_price900731">5,000</span>
-                        </div>
-                        <input type="hidden" id="hid_PKAG_CNT" value="1"/>
-                        <input type="hidden" id="hid_OrderCnt900731" className={cartStyles.goodscnt} value="1"/>
-                        <div className={cartStyles.product_info_cnt_wrap}>
-                            <span className={cartStyles.com_form_count} id="com_form_count900731">1</span> {/* cartStyles.com_form_count900731 */}
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900731', null, null, 1, 1, 10)" className={cartStyles.com_btn_plus}>+</a>
-                            <a href="#none" onClick="javascript:$.fn.comFormNumberCnt('com_form_count900731', null, null, -1, 1, 10)" className={cartStyles.com_btn_minus}>-</a>
-                            <a href="#none" onClick="javascript:fn_OrderAmountUpdate(900731);" className={cartStyles.btn_change}>변경</a>
-                        </div>
-                        <span className={cartStyles.product_info_price} id="totalgoodsprice900731">5,000</span>
-                        <div className={cartStyles.product_info_btn_wrap}>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'purchase', '900731');">바로구매</a>
-                            <a href="#none" onClick="javascript:fn_Buy(this, 'gift', '900731');">선물하기</a>
-                        </div>
-                        <a href="javascript:fn_Del('900731')" className={cartStyles.btn_product_delect}>삭제</a>
-                    </li>
+                        )
+                    })
+                }
                 </ul>
                 {/* <a href="#none" class="btn_del_selected">선택상품 삭제
                     <span id="spanSelCnt" style="display: inline;">3</span>

@@ -36,7 +36,6 @@ public class StoreController {
 	
 	@GetMapping(path = "getPopcornList")
 	public List<StoreDTO> getPopcornList(@RequestParam String category) {
-		System.out.println(category);
 		return storeService.getPopcornList(category);
 	}
 	
@@ -47,7 +46,6 @@ public class StoreController {
 	
 	@GetMapping(path = "isExistSubject")
 	public String isExistSubject(@RequestParam String subject) {
-		System.out.println(subject);
 		return storeService.isExistSubject(subject);
 	}
 	
@@ -90,8 +88,12 @@ public class StoreController {
 	
 	@GetMapping(path = "isExistCart")
 	public String isExistCart(@RequestParam String userName, String store_seq) {
-		System.out.println(store_seq);
 		return storeService.isExistCart(userName, store_seq);
+	}
+	
+	@GetMapping(path = "getCartList")
+	public List<CartDTO> getCartList(@RequestParam String userName) {
+		return storeService.getCartList(userName);
 	}
 	
 }

@@ -19,15 +19,17 @@ const LoginForm = () => {
     })
   }
 
+  const navigate = useNavigate()
+
   const onLogin = (e) => {
     e.preventDefault()
 
     axios.post('http://localhost:8080/store/login', null, { params: form })
-         .then(res => res.data ==='' ? alert('아이디또는 비밀번호가 다릅니다.'):sessionStorage.setItem('userName', userName))
+         .then(res => res.data ==='' ? alert('아이디또는 비밀번호가 다릅니다.')
+          : 
+           sessionStorage.setItem('userName', userName) || alert('스토어 로그인에 성공했어요!') || navigate('/store/'))
          .catch(error => console.log(error))
   }
-
-  const navigate = useNavigate()
 
   const onLogout = (e) => {
     e.preventDefault()

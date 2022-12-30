@@ -78,5 +78,11 @@ public class StoreServiceImpl implements StoreService {
 		else
 			return "non_exist";
 	}
+
+	@Override
+	public List<CartDTO> getCartList(String userName) {
+		//DB
+		return cartDAO.findByCart(userName);
+	}
 	
 }

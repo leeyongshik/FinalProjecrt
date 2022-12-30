@@ -25,4 +25,6 @@ public interface StoreService {
 
 	public String isExistCart(String userName, String store_seq);
 
+	public List<CartDTO> getCartList(String userName);
+
 }

@@ -107,7 +107,7 @@ const View = () => {
                     </div>
                     <div className={viewStyles.category_product_detail_contents_wrap}>
                         <p className={viewStyles.category_product_detail_sale_price_wrap}>
-                            <span className={viewStyles.store_deatail_sale_price} id="spnSalePrice">{ price }</span>
+                            <span className={viewStyles.store_deatail_sale_price} id="spnSalePrice">{[price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         </p>
                         <dl className={viewStyles.category_product_detail_add_info}>
                             <dt>상품구성</dt>
@@ -126,11 +126,11 @@ const View = () => {
                                 <a href="#none" onClick={ () => count>1 ? dispatch({ type: 'DECREMENT' }) : alert('1개 미만으로는 선택할 수 없습니다')} className={viewStyles.com_btn_minus} style={{background:' url(/img/dash-lg.svg) no-repeat center', backgroundSize:'12pt'}}>-</a>
                                 <span className={viewStyles.com_form_count}>{ count }</span>
                                 <a href="#none" onClick={ () => dispatch({ type: 'INCREMENT' })} className={viewStyles.com_btn_plus} style={{background:' url(/img/plus.svg) no-repeat center', backgroundSize:'15pt'}}>+</a>
-                                <span className={viewStyles.com_total_price} id="spantotalprice">{count===1 ? price :  endPrice }</span>
+                                <span className={viewStyles.com_total_price} id="spantotalprice">{count===1 ? [price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') :  [endPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }</span>
                             </div>
                             <div className={viewStyles.category_product_detail_total_price}>
                                 <p className={viewStyles.com_form_total_price}>총 구매금액
-                                    <span className={viewStyles.com_product_total_price}>{count===1 ? price :  endPrice }</span>
+                                    <span className={viewStyles.com_product_total_price}>{count===1 ? [price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') :  [endPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }</span>
                                 </p>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ const StoreCart = () => {
          axios.get(`http://localhost:8080/store/getCartListCount?userName=${sessionStorage.getItem("userName")}`)
          .then(res => setCountList(res.data))
          .catch(error => console.log(error))
-         console.log(countList)
+         console.log(countList, list)
     }, [])
 
     const onDelete = (targetSeq) => {
@@ -26,11 +26,41 @@ const StoreCart = () => {
         axios.get(`http://localhost:8080/store/deleteCart?cart_seq=${targetSeq}`)
              .then(alert('선택하신 상품이 삭제되었습니다!'))
              .catch(error => console.log(error))
+
+        // 장바구니 삭제 후 카운트와 아다리맞추기
+        axios.get(`http://localhost:8080/store/getCartListCount?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setCountList(res.data))
+         .catch(error => console.log(error))
     }
 
     const onBuy = () => {
+        let seq = 0;
+        let number = 0;
+        for (let i = 0; i < list.length; i++) {
+            seq = list[i].cart_seq
+            number = list[i].count
+
+            axios.post('http://localhost:8080/store/updateCart', null, {params: {
+                                count : number,
+                                cart_seq : seq
+                              }}
+                              )
+                 .then(console.log('스파르타 용시크행님ㅋ_ㅋ'))
+                 .catch(error => console.log(error))
+        }
+
+
         window.location.replace('/store/pay')
+
     }
+
+    const getTotalPrice = list => {
+        let sum = 0;
+        for (let i = 0; i < list.length; i++) {
+            sum += list[i].count * list[i].price;
+        }
+        return sum;
+      };
 
     return (
         <div>
@@ -38,7 +68,8 @@ const StoreCart = () => {
 
             <div className={cartStyles.cart_step_wrap}>
 		        <ul className={cartStyles.cart_step}>
-			        <li className={cartStyles.step0}>
+			        <li className={cartStyles.active}>
+                    <a style={{background:'url(/img/cart.svg) no-repeat center', backgroundSize:'15pt'}}></a>
                         <span>STEP 01</span>
                         <strong>장바구니</strong>
                     </li>
@@ -75,22 +106,39 @@ const StoreCart = () => {
         
                 <ul className={cartStyles.com_list_style1}>
 
+                    
                     {
                         
                     list.map((item, index) => {
+
                         const cartPlus = () => {
                             countList[index] = ++item.count;
-                            setCountList([...countList]);
+                            setCountList([...countList])
                             console.log(countList)
+                            
                         }
 
                         const cartMinus = () => {
                             item.count < 2 ? alert('1개 미만으로는 선택할 수 없습니다')
                             : 
                             countList[index] = --item.count;
-                            setCountList([...countList]);
+                            setCountList([...countList])
                             console.log(countList)
                         }
+
+                        // setTotalPrice(item.price * item.count)
+
+                        
+
+                        // const countChange = (e) => {
+                        //     const { name, value } = e.target
+                        //     console.log(e.target.value)
+                        
+                        //     setForm({
+                        //       ...form,
+                        //       [name]: value
+                        //     })
+                        //   }
 
                         return (
                             <li className="" id="cart_item_idx_900734" key={ item.cart_seq }>
@@ -107,9 +155,10 @@ const StoreCart = () => {
                         <input type="hidden" id="hid_PKAG_CNT" value="1"/>
                         <input type="hidden" id="hid_OrderCnt900734" className={cartStyles.goodscnt} value="1"/>
                         <div className={cartStyles.product_info_cnt_wrap}>
+                        {/* onChange={ countChange } */}
                             <span class={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
-                            <a href="#none" onClick={ cartPlus } className={cartStyles.com_btn_plus}>+</a>
-                            <a href="#none" onClick={ cartMinus } className={cartStyles.com_btn_minus}>-</a>
+                            <a href="#none" onClick={ cartPlus } className={cartStyles.com_btn_plus} style={{background:'url(/img/caret-up-fill.svg) no-repeat center', backgroundSize:'8pt'}}>+</a>
+                            <a href="#none" onClick={ cartMinus } className={cartStyles.com_btn_minus } style={{background:'url(/img/caret-down-fill.svg) no-repeat center', backgroundSize:'8pt'}}>-</a>
                             {/* <a href="#none" className={cartStyles.btn_change}>변경</a> */}
                         </div>
                         <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
@@ -118,7 +167,7 @@ const StoreCart = () => {
                             {/* <a href="#none" >선물하기</a> */}
                         </div>
                         {/* <a href="javascript:fn_Del('900734')" onClick={ () => onRemove(item.cart_seq) } className={cartStyles.btn_product_delect}>삭제</a> */}
-                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect}>삭제</button>
+                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect} style={{background:'url(/img/x.svg) no-repeat center', backgroundSize:'8pt'}}>삭제</button>
                     </li>
                         )
                     })
@@ -135,16 +184,12 @@ const StoreCart = () => {
                     
                     <thead>
                         <tr>
-                            <th>총 상품 금액</th>
-                            <th>할인금액</th>
-                            <th>총 결제 예정금액</th>
+                            <th style={{ marginTop: 20, paddingTop: 20 }}>총 결제 예정금액</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><span id="sTot_Sales_Price">{[list.price * list.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></strong></td>
-                            <td className={cartStyles.com_cart_calculator_marker}><strong><span id="s_Tot_Promotion">0</span></strong></td>
-                            <td><strong className={cartStyles.cart_total_price}><span id="sTot_Promotion_Price">{[list.price * list.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></strong></td>
+                            <td><strong className={cartStyles.cart_total_price}><span id="sTot_Promotion_Price">{ getTotalPrice(list).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }</span></strong></td>
                         </tr>
                     </tbody>
                 </table>

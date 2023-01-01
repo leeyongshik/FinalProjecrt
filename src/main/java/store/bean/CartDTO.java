@@ -45,4 +45,6 @@ public class CartDTO {
 	@Column(name="username", nullable = false, length = 30)
 	private String userName;
 	
+	@Column(name = "state")
+	private String state;
 }

@@ -196,7 +196,7 @@ dl:after, ul:after, ol:after {
     overflow: hidden;
 }
 .category_product_detail_contents .category_product_detail_contents_wrap .category_product_detail_btn_wrap a:first-child {
-    margin-left: 0;
+    margin-left: 220px;
 }
 .category_product_detail_contents .category_product_detail_contents_wrap .category_product_detail_btn_wrap a.btn_cart {
     width: 60px;

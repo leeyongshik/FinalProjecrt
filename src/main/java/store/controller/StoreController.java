@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -105,6 +106,11 @@ public class StoreController {
 	public void deleteCart(@RequestParam String cart_seq) {
 		storeService.deleteCart(cart_seq);
 	}
-		
+	
+	@PostMapping(path = "updateCart")
+	public void updateCart(@ModelAttribute CartDTO cartDTO) {
+		System.out.println(cartDTO.getCount());
+		storeService.updateCart(cartDTO);
+	}
 	
 }

@@ -78,7 +78,8 @@ const View = () => {
                     userName : sessionStorage.getItem("userName")
                 }}
             )
-                 .then(alert('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?') || navigate('/store/cart'))
+                 .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})
+                 
                  .catch(error => console.log(error))
                  )
                  .catch(error => console.log(error))
@@ -114,16 +115,12 @@ const View = () => {
                             <dd>구매일로부터 6개월 이내</dd>
                             <dt>원산지</dt>
                             <dd>{ country }</dd>
-                            <dt>상품교환</dt>
-                            <dd>
-                                <a href="#none" className={viewStyles.btn_available_viewcgv} onclick="javascript:fnGetTheater(100332);">사용가능 BITBOX 보기</a>
-                            </dd>
                         </dl>
                         <div className={viewStyles.category_product_detail_price_wrap}>
                             <div className={viewStyles.com_form_number}>
                                 <a href="#none" onClick={ () => count>1 ? dispatch({ type: 'DECREMENT' }) : alert('1개 미만으로는 선택할 수 없습니다')} className={viewStyles.com_btn_minus} style={{background:' url(/img/dash-lg.svg) no-repeat center', backgroundSize:'12pt'}}>-</a>
                                 <span className={viewStyles.com_form_count}>{ count }</span>
-                                <a href="#none" onClick={ () => dispatch({ type: 'INCREMENT' })} className={viewStyles.com_btn_plus} style={{background:' url(/img/plus.svg) no-repeat center', backgroundSize:'15pt'}}>+</a>
+                                <a href="#none" onClick={ () => dispatch({ type: 'INCREMENT' })} className={viewStyles.com_btn_plus} style={{background:'url(/img/plus.svg) no-repeat center', backgroundSize:'15pt'}}>+</a>
                                 <span className={viewStyles.com_total_price} id="spantotalprice">{count===1 ? [price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') :  [endPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }</span>
                             </div>
                             <div className={viewStyles.category_product_detail_total_price}>
@@ -133,7 +130,7 @@ const View = () => {
                             </div>
                         </div>
                         <div className={viewStyles.category_product_detail_btn_wrap}>
-                            <a href="#" onClick={ goToCart } className={viewStyles.btn_cart} style={{background:'#fb4357  url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
+                            <a href="#" onClick={ goToCart } className={viewStyles.btn_cart} style={{background:'#B20710 url(/img/cart.svg) no-repeat center', backgroundSize:'23pt'}}>장바구니</a>
                             {/* <a href="#" onClick="javascript:app.goLogin(); return false;">선물하기</a> */}
                             <a href="#" onClick={ goToPay }>구매하기</a>
                         </div>

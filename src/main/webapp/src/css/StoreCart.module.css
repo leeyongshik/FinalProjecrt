@@ -380,7 +380,7 @@ input[type="checkbox"].com_custom_checkbox + label:before {
     margin: 8px 19px 28px 25px;
 }
 .com_cart_list_wrap .com_list_style1 > li .product_info_btn_wrap a:first-child {
-    margin-top: 0;
+    margin-top: 20px;
 }
 .com_cart_list_wrap .com_list_style1 > li .product_info_btn_wrap a {
     display: block;

@@ -12,6 +12,14 @@ const StorePayment = () => {
              .catch(error => console.log(error))
     }, [])
 
+    const { v1 } = require('uuid');
+    const uuid = () => {
+        const tokens = v1()
+        return tokens[5];
+    }
+    console.log(uuid())
+    
+
     return (
         <div>
             <StoreHeader/>
@@ -210,7 +218,7 @@ const StorePayment = () => {
                     </dl>
                 </div>
                 <div className={payStyles.com_btn_wrap}>
-                    <a href="#none" className={payStyles.btn_style0} onclick="fn_Payment()" style={{width:'500px'}}>결제하기</a> 
+                    <a href="#none" className={payStyles.btn_style0} onClick="fn_Payment()" style={{width:'500px'}}>결제하기</a> 
                     {/* <a href="#none" className={payStyles.btn_prev} onclick="javascript:location.replace('http://www.cgv.co.kr/culture-event/popcorn-store/user-cart.aspx');">
                         <img src="./../../../CDN/R2014/images/giftstore/common/btn_prev.png" alt="이전화면으로 이동"/>이전화면
                     </a> */}

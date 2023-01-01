@@ -95,5 +95,11 @@ public class StoreServiceImpl implements StoreService {
 	public void deleteCart(String cart_seq) {
 		cartDAO.deleteById(cart_seq);
 	}
+
+	@Override
+	public void updateCart(CartDTO cartDTO) {
+		//DB
+		cartDAO.save(cartDTO);
+	}
 	
 }

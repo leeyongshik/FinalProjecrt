@@ -31,4 +31,6 @@ public interface StoreService {
 
 	public void deleteCart(String cart_seq);
 
+	public void updateCart(CartDTO cartDTO);
+
 }

@@ -15,7 +15,8 @@ const StorePopcone = () => {
         store_seq : '',
         subSubject : '',
         subject : '',
-        userName : ''
+        userName : '',
+        state : 'stand'
     })
 
   useEffect(() => {
@@ -54,10 +55,11 @@ const StorePopcone = () => {
                                 store_seq : item.store_seq,
                                 subSubject : item.subSubject,
                                 subject : item.subject,
-                                userName : sessionStorage.getItem("userName")
+                                userName : sessionStorage.getItem("userName"),
+                                state : 'stand'
                               }}
                               )
-                                        .then(res => console.log(res.data))
+                                        .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})
                                         .catch(error => console.log(error))
                                 
                         }
@@ -72,13 +74,13 @@ const StorePopcone = () => {
                                         <span className={popcornStyles.com_list_text_title}>{ item.subject }</span>
                                         <span className={popcornStyles.com_list_text_name}>{ item.subSubject }</span>
                                         <span className={popcornStyles.com_list_sale_price_wrap}>
-                                            <span className={popcornStyles.store_deatail_source_price}><span className={popcornStyles.store_deatail_source_price}>{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></span>
+                                            <span className={popcornStyles.store_deatail_source_price}>{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                                         </span>
                                     </span>
                                 </Link>
                             <a href="#" className={popcornStyles.btn_category_product_cart} onClick={ goToCart } style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>1</a>
-                            <a href="#" className={popcornStyles.btn_category_product_gift}>2</a>
-                            <a href="#" className={popcornStyles.btn_category_product_buy}>3</a>
+                            <a href="#" className={popcornStyles.btn_category_product_gift} style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>2</a>
+                            <a href="#" className={popcornStyles.btn_category_product_buy} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>3</a>
                             </li>
                         )
                     })

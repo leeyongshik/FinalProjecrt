@@ -162,10 +162,9 @@ input[type="checkbox"].com_custom_checkbox + label:before {
     width: 24px;
     height: 24px;
     font-size: 0;
-    /* background: transparent url(./../../images/giftstore/common/bg_checkbox_radio.png) -1px -1px scroll no-repeat; */
 }
 .com_cart_list_wrap .cart_allchecker_wrap strong.com_custom_checkbox_product_name {
-    width: 360px;
+    width: 420px;
     text-align: left;
     text-indent: 86px;
 }
@@ -184,7 +183,7 @@ input[type="checkbox"].com_custom_checkbox + label:before {
     width: 115px;
 }
 .com_cart_list_wrap .cart_allchecker_wrap strong.com_custom_checkbox_cnt {
-    width: 166px;
+    width: 195px;
 }
 .com_cart_list_wrap .cart_allchecker_wrap strong.com_custom_checkbox_price {
     width: 108px;
@@ -199,6 +198,7 @@ input[type="checkbox"].com_custom_checkbox + label:before {
     overflow: hidden;
     position: relative;
     padding: 20px 0 0;
+    padding-left: 50PX;
     border-top: 1px solid #d6d6d6;
 }
 input[type="checkbox"].com_custom_checkbox {

@@ -34,15 +34,36 @@ const StoreCart = () => {
     }
 
     const onBuy = () => {
-        let seq = 0;
-        let number = 0;
+        let listcartseq = 0;
+        let listcount = 0;
+        let liststoreseq = 0;
+        let listsubject = 0;
+        let listsubsubject = 0;
+        let listprice = 0;
+        let listimg = 0;
+        let liststate = 0;
+
         for (let i = 0; i < list.length; i++) {
-            seq = list[i].cart_seq
-            number = list[i].count
+            listcartseq = list[i].cart_seq
+            listcount = list[i].count
+            liststoreseq = list[i].store_seq
+            listsubject = list[i].subject
+            listsubsubject = list[i].subSubject
+            listprice = list[i].price
+            listimg = list[i].img
+            liststate = list[i].state
 
             axios.post('http://localhost:8080/store/updateCart', null, {params: {
-                                count : number,
-                                cart_seq : seq
+                                cart_seq : listcartseq,
+                                count : listcount,
+                                store_seq : liststoreseq,
+                                subject : listsubject,
+                                subSubject : listsubsubject,
+                                price : listprice,
+                                userName : sessionStorage.getItem("userName"),
+                                img : listimg,
+                                state : liststate
+
                               }}
                               )
                  .then(console.log('스파르타 용시크행님ㅋ_ㅋ'))
@@ -69,7 +90,7 @@ const StoreCart = () => {
             <div className={cartStyles.cart_step_wrap}>
 		        <ul className={cartStyles.cart_step}>
 			        <li className={cartStyles.active}>
-                    <a style={{background:'url(/img/cart.svg) no-repeat center', backgroundSize:'15pt'}}></a>
+                    <img src='../img/cart2.svg' style={{display:'inline-block',position:'absolute',top:'45%', left:0, width:'38px',height:'38px', marginTop:'-14px'}}/>
                         <span>STEP 01</span>
                         <strong>장바구니</strong>
                     </li>
@@ -94,8 +115,6 @@ const StoreCart = () => {
 
             <div className={cartStyles.com_cart_list_wrap}>
 		        <p className={cartStyles.cart_allchecker_wrap}>
-			        <input type="checkbox" id="checkboxall" className={cartStyles.com_custom_checkbox} checked="checked"/>
-			        <label for="checkboxall">전체선택</label>
 			        <strong className={cartStyles.com_custom_checkbox_product_name}>상품명</strong>
 			        <strong className={cartStyles.stcom_custom_checkbox_sel_priceep0}>판매금액</strong>
 			        <strong className={cartStyles.com_custom_checkbox_cnt}>수량</strong>
@@ -126,25 +145,9 @@ const StoreCart = () => {
                             console.log(countList)
                         }
 
-                        // setTotalPrice(item.price * item.count)
-
-                        
-
-                        // const countChange = (e) => {
-                        //     const { name, value } = e.target
-                        //     console.log(e.target.value)
-                        
-                        //     setForm({
-                        //       ...form,
-                        //       [name]: value
-                        //     })
-                        //   }
-
                         return (
                             <li className="" id="cart_item_idx_900734" key={ item.cart_seq }>
-                        <input type="checkbox" id="checkbox900734" name="checkbox" value="900734" className={cartStyles.com_custom_checkbox} checked="checked"/>
-                        <label for="checkbox900734"></label>
-                        <a href="/culture-event/popcorn-store/product-detail.aspx?GG_NO=100083" className={cartStyles.product_info_img}>
+                        <a href={`/store/view/${ item.store_seq }`} className={cartStyles.product_info_img}>
                             <img src={`../storage/${ item.img }`} alt={ item.subject }/>
                             <strong className={cartStyles.product_info_name}>{ item.subject }</strong>
                             <span className={cartStyles.product_info_origin} id="spanOriginName900734">{ item.subSubject }</span>
@@ -152,13 +155,10 @@ const StoreCart = () => {
                         <div className={cartStyles.product_info_wrap}>
                             <span className={cartStyles.product_info_one_price} id="product_info_one_price900734">{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         </div>
-                        <input type="hidden" id="hid_PKAG_CNT" value="1"/>
-                        <input type="hidden" id="hid_OrderCnt900734" className={cartStyles.goodscnt} value="1"/>
                         <div className={cartStyles.product_info_cnt_wrap}>
-                        {/* onChange={ countChange } */}
                             <span class={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
-                            <a href="#none" onClick={ cartPlus } className={cartStyles.com_btn_plus} style={{background:'url(/img/caret-up-fill.svg) no-repeat center', backgroundSize:'8pt'}}>+</a>
-                            <a href="#none" onClick={ cartMinus } className={cartStyles.com_btn_minus } style={{background:'url(/img/caret-down-fill.svg) no-repeat center', backgroundSize:'8pt'}}>-</a>
+                            <a onClick={ cartPlus } className={cartStyles.com_btn_plus} style={{background:'url(/img/caret-up-fill.svg) no-repeat center', backgroundSize:'8pt', cursor:'pointer'}}>+</a>
+                            <a onClick={ cartMinus } className={cartStyles.com_btn_minus } style={{background:'url(/img/caret-down-fill.svg) no-repeat center', backgroundSize:'8pt', cursor:'pointer'}}>-</a>
                             {/* <a href="#none" className={cartStyles.btn_change}>변경</a> */}
                         </div>
                         <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>

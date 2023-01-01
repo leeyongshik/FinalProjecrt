@@ -9,6 +9,7 @@ import WritreForm2 from './component/store/WritreForm2';
 import StoreCart from './component/store/StoreCart';
 import StorePayment from './component/store/StorePayment';
 import LoginForm from './component/store/LoginForm';
+import PayComplete from './component/store/PayComplete';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path='/store/writeForm2' element={<WritreForm2/>}></Route>
           <Route path='/store/cart' element={<StoreCart/>}></Route>
           <Route path='/store/pay' element={<StorePayment/>}></Route>
+          <Route path='/store/paycomplete' element={<PayComplete/>}></Route>
 
         </Routes>
       </>

@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import payStyles from '../../css/StorePayment.module.css'
+import axios from 'axios';
 
 const StorePayment = () => {
+    const [ list, setList ] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
+             .then(res => setList(res.data))
+             .catch(error => console.log(error))
+    }, [])
+
     return (
         <div>
             <StoreHeader/>
@@ -38,54 +47,25 @@ const StorePayment = () => {
                 </p>
                 
                 <ul className={payStyles.com_list_style1}>
-                    <li>
-                        <div className={payStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Mobile/List/16680650065080.jpg" alt="dummy image"/>
-                            <strong className={payStyles.product_info_name}>고소팝콘(M)</strong>
-                            <span className={payStyles.product_info_origin}>고소팝콘(M)</span>
-                        </div>
-                        <div className={payStyles.product_info_wrap}>
-                            <span className={payStyles.product_info_one_price}>5,000</span>
-                        </div>
-                        <div className={payStyles.product_info_cnt_wrap}>1개</div>
-                        <span className={payStyles.product_info_price}>5,000</span>
-                    </li>
-                    <li>
-                        <div className={payStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Mobile/List/16678058251930.jpg" alt="dummy image"/>
-                            <strong className={payStyles.product_info_name}>CGV콤보</strong> 
-                            <span className={payStyles.product_info_origin}>팝콘(L)1+탄산음료(M)2</span>
-                        </div>
-                        <div className={payStyles.product_info_wrap}>
-                            <span className={payStyles.product_info_one_price}>10,000</span>
-                        </div>
-                        <div className={payStyles.product_info_cnt_wrap}>1개</div>
-                        <span className={payStyles.product_info_price}>10,000</span> 
-                    </li>
-                    <li>
-                        <div className={payStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Mobile/List/16680718729940.jpg" alt="dummy image"/>
-                            <strong className={payStyles.product_info_name}>탄산음료(M)</strong> 
-                            <span className={payStyles.product_info_origin}>탄산음료(M)</span>
-                        </div>
-                        <div className={payStyles.product_info_wrap}>
-                            <span className={payStyles.product_info_one_price}>2,500</span>
-                        </div>
-                        <div className={payStyles.product_info_cnt_wrap}>1개</div>
-                        <span className={payStyles.product_info_price}>2,500</span> 
-                    </li>
-                    <li>
-                        <div className={payStyles.product_info_img}>
-                            <img src="http://img.cgv.co.kr/GiftStore/Product/Mobile/List/16678903565830.jpg" alt="dummy image"/>
-                            <strong className={payStyles.product_info_name}>더블콤보</strong> 
-                            <span className={payStyles.product_info_origin}>팝콘(M)2+탄산(M)2</span>
-                        </div>
-                        <div className={payStyles.product_info_wrap}>
-                            <span className={payStyles.product_info_one_price}>13,000</span>
-                        </div>
-                        <div className={payStyles.product_info_cnt_wrap}>1개</div>
-                        <span className={payStyles.product_info_price}>13,000</span> 
-                    </li>
+
+                    {
+                        list.map((item, index) => {
+                            return (
+                                <li>
+                                    <div className={payStyles.product_info_img}>
+                                        <img src={`../storage/${ item.img }`} alt={ item.subject }/>
+                                        <strong className={payStyles.product_info_name}>{ item.subject }</strong>
+                                        <span className={payStyles.product_info_origin}>{ item.subSubject }</span>
+                                    </div>
+                                    <div className={payStyles.product_info_wrap}>
+                                        <span className={payStyles.product_info_one_price}>{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+                                    </div>
+                                    <div className={payStyles.product_info_cnt_wrap}>{ item.count }개</div>
+                                    <span className={payStyles.product_info_price}>{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
 
                 <table className={payStyles.com_cart_total_price_wrap}>

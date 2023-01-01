@@ -28,6 +28,10 @@ const StoreCart = () => {
              .catch(error => console.log(error))
     }
 
+    const onBuy = () => {
+        window.location.replace('/store/pay')
+    }
+
     return (
         <div>
             <StoreHeader/>
@@ -138,16 +142,16 @@ const StoreCart = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><span id="sTot_Sales_Price">17,500</span></strong></td>
+                            <td><strong><span id="sTot_Sales_Price">{[list.price * list.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></strong></td>
                             <td className={cartStyles.com_cart_calculator_marker}><strong><span id="s_Tot_Promotion">0</span></strong></td>
-                            <td><strong className={cartStyles.cart_total_price}><span id="sTot_Promotion_Price">17,500</span></strong></td>
+                            <td><strong className={cartStyles.cart_total_price}><span id="sTot_Promotion_Price">{[list.price * list.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></strong></td>
                         </tr>
                     </tbody>
                 </table>
 
                 <div className={cartStyles.com_btn_wrap }> {/* cartStyles.pT60 */}
                     {/* <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'gift', '');">선물하기</a> */}
-                    <a href="#none" className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20 }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
+                    <a href="#none" onClick={ onBuy } className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20 }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
                 </div>
             </div>
         </div>

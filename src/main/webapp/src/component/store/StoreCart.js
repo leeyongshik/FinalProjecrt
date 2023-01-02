@@ -2,12 +2,26 @@ import React, { useEffect, useReducer, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import cartStyles from '../../css/StoreCart.module.css'
 import axios from 'axios';
+import StorePayment from './StorePayment';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const StoreCart = () => {
     const [list, setList] = useState([])
     const [countList, setCountList] = useState([])
+    const [show, setShow] = useState(false)
+    const [one, setOne] = useState({
+        cart_seq : '',
+        count : '',
+        store_seq : '',
+        subject : '',
+        subSubject : '',
+        price : '',
+        userName : '',
+        img : '',
+        state : ''
+    })
 
     useEffect(() => {
     axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
@@ -83,6 +97,12 @@ const StoreCart = () => {
         return sum;
       };
 
+    // const navigate = useNavigate()
+    const nowBuy = (targetSeq) => {
+        setOne(list.find((item) => item.cart_seq !== targetSeq));
+        
+    }
+
     return (
         <div>
             <StoreHeader/>
@@ -156,14 +176,14 @@ const StoreCart = () => {
                             <span className={cartStyles.product_info_one_price} id="product_info_one_price900734">{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         </div>
                         <div className={cartStyles.product_info_cnt_wrap}>
-                            <span class={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
+                            <span className={cartStyles.com_form_count} id="com_form_count900734">{ item.count }</span>
                             <a onClick={ cartPlus } className={cartStyles.com_btn_plus} style={{background:'url(/img/caret-up-fill.svg) no-repeat center', backgroundSize:'8pt', cursor:'pointer'}}>+</a>
                             <a onClick={ cartMinus } className={cartStyles.com_btn_minus } style={{background:'url(/img/caret-down-fill.svg) no-repeat center', backgroundSize:'8pt', cursor:'pointer'}}>-</a>
                             {/* <a href="#none" className={cartStyles.btn_change}>변경</a> */}
                         </div>
                         <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         <div className={cartStyles.product_info_btn_wrap}>
-                            <a href="#none" >바로구매</a>
+                            <a href="#none" onClick={() => nowBuy(item.cart_seq) } >바로구매</a>
                             {/* <a href="#none" >선물하기</a> */}
                         </div>
                         {/* <a href="javascript:fn_Del('900734')" onClick={ () => onRemove(item.cart_seq) } className={cartStyles.btn_product_delect}>삭제</a> */}
@@ -173,7 +193,7 @@ const StoreCart = () => {
                     })
                 }
                 </ul>
-                {/* <a href="#none" class="btn_del_selected">선택상품 삭제
+                {/* <a href="#none" className="btn_del_selected">선택상품 삭제
                     <span id="spanSelCnt" style="display: inline;">3</span>
                 </a> */}
                 <span id="notimsg">장바구니에 담긴 상품은 최대 30일까지 보관됩니다.</span>
@@ -199,6 +219,7 @@ const StoreCart = () => {
                     <a href="#none" onClick={ onBuy } className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20 }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
                 </div>
             </div>
+            
         </div>
     );
 };

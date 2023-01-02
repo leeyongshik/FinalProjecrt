@@ -3,21 +3,23 @@ import StoreHeader from './StoreHeader';
 import payStyles from '../../css/StorePayment.module.css'
 import axios from 'axios';
 
-const StorePayment = () => {
+const StorePayment = (props) => {
     const [ list, setList ] = useState([])
 
+    console.log(props.one)
     useEffect(() => {
         axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
              .then(res => setList(res.data))
              .catch(error => console.log(error))
+             console.log(props.one)
     }, [])
 
-    const { v1 } = require('uuid');
-    const uuid = () => {
-        const tokens = v1()
-        return tokens[5];
-    }
-    console.log(uuid())
+    // const { v1 } = require('uuid');
+    // const uuid = () => {
+    //     const tokens = v1()
+    //     return tokens[5];
+    // }
+    // console.log(uuid())
     
 
     return (
@@ -59,7 +61,7 @@ const StorePayment = () => {
                     {
                         list.map((item, index) => {
                             return (
-                                <li>
+                                <li key={ index }>
                                     <div className={payStyles.product_info_img}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>
                                         <strong className={payStyles.product_info_name}>{ item.subject }</strong>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../css/List.module.css';
 import { BrowserRouter, Router, Link, Route, Routes } from "react-router-dom";
 import Index from './Index';
@@ -10,6 +10,31 @@ import StoreHeader from './StoreHeader';
 import topButtonStyles from '../../css/TopButton.module.css';
 
 const List = () => {
+    const [showButton, setShowButton] = useState(false);
+
+    const scrollToTop = (e) => {
+        e.preventDefault()
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
+    useEffect(() => {
+        const ShowButtonClick = () => {
+            if (window.scrollY > 250) {
+                setShowButton(true)
+            } else {
+                setShowButton(false)
+            }
+        }
+        window.addEventListener("scroll", ShowButtonClick)
+        
+        return () => {
+            window.removeEventListener("scroll", ShowButtonClick)
+        }
+    }, [])
+
     return (
         <div >
             <div className={styles.big_banner_wrap}>
@@ -42,12 +67,14 @@ const List = () => {
                 <Route path="/snack" element={<Snack />}></Route>
             </Routes>
 
-            <div className={topButtonStyles.fixedBtn_wrap }> {/* topButtonStyles.topBtn */}
-                <a href="/ticket/" className={topButtonStyles.btn_fixedTicketing}>예매하기</a>
-                <a href="#none" className={topButtonStyles.btn_gotoTop}>
-                    <img src="../img/gotoTop.png" alt="최상단으로 이동" />
-                </a>
-            </div>
+            {showButton &&
+                <div className={topButtonStyles.fixedBtn_wrap }> {/* topButtonStyles.topBtn */}
+                    <a href="/ticket/" className={topButtonStyles.btn_fixedTicketing}>예매하기</a>
+                    <a onClick={ scrollToTop } className={topButtonStyles.btn_gotoTop}>
+                        <img src='./img/arrow-up.svg' />
+                    </a>
+                </div>
+            }
             
         </div>
     );

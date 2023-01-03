@@ -1,14 +1,22 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../css/List.module.css'
 
 const StoreHeader = () => {
+    const [count, setCount] = useState(0)
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setCount(res.data.length))
+         .catch(error => console.log(error))
+    }, [])
+
     return (
         <>
             <div className={styles.category_wrap}>
                 <div className={styles.category_contents_wrap}>
                     <ul className={styles.category_content} style={{listStyle: 'none'}}>
-                        <li id="cm4" name="categorymenu" className="">
+                        <li id="cm4" name="categorymenu" className={ styles.active }>
                             <Link to='/store/combo'>콤보</Link>
                             |
                         </li>
@@ -27,7 +35,7 @@ const StoreHeader = () => {
                     <ul className={styles.cart_content} style={{listStyle: 'none'}}>
                         <li>
                             <a href="#">장바구니</a>
-                            <span id="cartviewcnt">0</span>
+                            <span id="cartviewcnt">{ count }</span>
                         </li>
                     </ul>
                 </div>

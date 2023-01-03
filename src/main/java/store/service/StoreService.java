@@ -32,6 +32,8 @@ public interface StoreService {
 	public void deleteCart(String cart_seq);
 
 	public void updateCart(CartDTO cartDTO);
+	
+	public CartDTO getOne(String userName, String store_seq);
 
 	public List<StoreDTO> getIndexCombo();
 

@@ -106,3 +106,20 @@ dl:after, ul:after, ol:after {
     background-color: #ccc;
     z-index: 1;
 }
+
+.category_content li.active a {
+    color: #B20710;
+}
+
+.category_content li.active a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    /* bottom: -19px; */
+    top: 25px;
+    width: 30%;
+    height: 3px;
+    margin-left: 47px;
+    background-color: #B20710;
+    z-index: 2;
+}

@@ -112,6 +112,11 @@ public class StoreController {
 		storeService.updateCart(cartDTO);
 	}
 	
+	@GetMapping(path = "getOne")
+	public CartDTO getOne(@RequestParam String userName, String store_seq) {
+		return storeService.getOne(userName, store_seq);
+	}
+	
 	@GetMapping(path = "getIndexCombo")
 	public List<StoreDTO> getIndexCombo() {
 		return storeService.getIndexCombo();

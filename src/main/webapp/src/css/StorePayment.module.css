@@ -204,7 +204,7 @@ dl:after, ul:after, ol:after {
 }
 .com_cart_list_wrap .com_list_style1 > li .product_info_img .product_info_name {
     display: block;
-    margin-top: 4px;
+    margin-top: 20px;
     font-family: 'CJONLYONENEW';
     font-weight: 500;
     font-size: 16px;
@@ -233,7 +233,7 @@ dl:after, ul:after, ol:after {
 }
 .com_cart_list_wrap .com_list_style1 > li .product_info_wrap .product_info_one_price {
     display: block;
-    margin-top: 23px;
+    margin-top: 35px;
     font-weight: 500;
     font-size: 17px;
     color: #000;

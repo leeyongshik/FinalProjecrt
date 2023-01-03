@@ -101,6 +101,12 @@ public class StoreServiceImpl implements StoreService {
 		//DB
 		cartDAO.save(cartDTO);
 	}
+	
+	@Override
+	public CartDTO getOne(String userName, String store_seq) {
+		//DB
+		return cartDAO.findByOne(userName, store_seq);
+	}
 
 	@Override
 	public List<StoreDTO> getIndexCombo() {

@@ -22,6 +22,7 @@ public interface CartDAO extends JpaRepository<CartDTO, String> {
 	@Query("select cartDTO.count from CartDTO cartDTO where cartDTO.userName=:userName and cartDTO.state='cart' order by cart_seq desc")
 	public List<Integer> findByCartCount(@Param("userName") String userName);
 	
-//	@Query("delete from CartDTO cartDTO where cartDTO.cart_seq=:cart_seq")
-//	public void deleteById(@Param("cart_seq") int cart_seq);
+	@Query("select cartDTO from CartDTO cartDTO where cartDTO.userName=:userName and cartDTO.store_seq=:store_seq and cartDTO.state='pay'")
+	public CartDTO findByOne(@Param("userName") String userName, @Param("store_seq") String store_seq);
+	
 }

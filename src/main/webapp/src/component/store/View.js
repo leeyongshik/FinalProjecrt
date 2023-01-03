@@ -31,7 +31,8 @@ const View = () => {
         subSubject: '',
         country: '',
         content: '',
-        img: ''
+        img: '',
+        state: ''
     })
     const { subject, price, subSubject, country, content, img } = data
 
@@ -92,7 +93,21 @@ const View = () => {
     }
 
     const goToPay = () => {
-        window.location.replace('/store/pay')
+        sessionStorage.getItem("userName") === null ? 
+            alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
+            axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                    count : count,
+                    img : img,
+                    price : price,
+                    store_seq : store_seq,
+                    subSubject : subSubject,
+                    subject : subject,
+                    userName : sessionStorage.getItem("userName"),
+                    state : 'pay'
+                }}
+            )
+                 .then(() => { navigate(`/store/pay/${store_seq}`) })
+                 .catch(error => console.log(error))
     }
 
     return (

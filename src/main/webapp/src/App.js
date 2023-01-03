@@ -25,7 +25,7 @@ const App = () => {
           <Route path='/store/loginForm' element={<LoginForm/>}></Route>
           <Route path='/store/writeForm2' element={<WritreForm2/>}></Route>
           <Route path='/store/cart' element={<StoreCart/>}></Route>
-          <Route path='/store/pay/*' element={<StorePayment/>}></Route>
+          <Route path='/store/pay/:store_seq' element={<StorePayment/>}></Route>
           <Route path='/store/paycomplete' element={<PayComplete/>}></Route>
           <Route path='/store/pay' element={<StorePay/>}></Route>
 

@@ -114,10 +114,6 @@ const StoreCart = () => {
                         <span>STEP 01</span>
                         <strong>장바구니</strong>
                     </li>
-			        {/* <li className={cartStyles.step1}>
-                        <span>STEP 02</span>
-                        <strong>선물정보 입력</strong>
-                    </li> */}
 			        <li className={cartStyles.step2}>
                         <span>STEP 02</span>
                         <strong>결제하기</strong>

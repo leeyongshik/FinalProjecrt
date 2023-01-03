@@ -70,12 +70,7 @@ const List = () => {
             {showButton &&
                 <div className={topButtonStyles.fixedBtn_wrap }> {/* topButtonStyles.topBtn */}
                     <a href="/ticket/" className={topButtonStyles.btn_fixedTicketing}>예매하기</a>
-                    <a href="#" className={topButtonStyles.btn_gotoTop}>
-                        <img src='./img/arrow-up.svg' />
-                    </a>
-                    {/* <a herf="#" onClick={ scrollToTop } className={topButtonStyles.btn_gotoTop}>
-                        <img src='./img/arrow-up.svg' />
-                    </a> */}
+                    <a href="#" onClick={ scrollToTop } className={topButtonStyles.btn_gotoTop} style={{background:' url(/img/arrow-up.svg) no-repeat center', backgroundSize:'20pt'}}></a>
                 </div>
             }
             

@@ -71,11 +71,22 @@ const StorePopcone = () => {
                                 .catch(error => console.log(error))
                                 
                         }
-                        const goToPay = (e) => {
+                        const goToPay = () => {
 
-                            e.preventDefault()
                             
-                                
+                            
+                            axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                                    count : 1,
+                                    img : item.img,
+                                    price : item.price,
+                                    store_seq : item.store_seq,
+                                    subSubject : item.subSubject,
+                                    subject : item.subject,
+                                    userName : sessionStorage.getItem("userName"),
+                                    state : 'pay'
+                                }})
+                                .then(()=>navigate(`/store/pay/${item.store_seq}`))
+                                .catch(error => console.log(error))
                         }
 
                         return (

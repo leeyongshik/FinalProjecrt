@@ -212,3 +212,10 @@ ol, ul {
     left: 275px;
     z-index: 3;
 }
+.category_product_list > li:first-child .category_product_inner_list li:hover .btn_category_product_buy {
+    left: 145px;
+}
+.category_product_inner_list li:hover .btn_category_product_buy {
+    left: 335px;
+    z-index: 4;
+}

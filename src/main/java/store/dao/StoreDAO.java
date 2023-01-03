@@ -26,4 +26,7 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	@Query("select userDTO from UserDTO userDTO where userDTO.userName=:userName and userDTO.password=:password")
 	public UserDTO login(@Param("userName") String userName, @Param("password") String password);
 	
+	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.category=:category")
+	public List<StoreDTO> getIndexCombo();
+	
 }

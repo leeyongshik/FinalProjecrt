@@ -35,12 +35,16 @@
 a {
   text-decoration: none;
 }
-
+.fixedBtn_wrap.topBtn .btn_gotoTop {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s;
+}
 .fixedBtn_wrap .btn_gotoTop {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
   right: 40px;
   width: 48px;
   height: 48px;
@@ -51,4 +55,9 @@ a {
   /* opacity: 0; */
   pointer-events: none;
   transition: opacity 0.2s;
+  
+}
+.fixedBtn_wrap .btn_gotoTop img {
+  width: 15px;
+  height: 21px;
 }

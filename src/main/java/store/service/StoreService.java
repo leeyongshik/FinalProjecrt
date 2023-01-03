@@ -33,4 +33,6 @@ public interface StoreService {
 
 	public void updateCart(CartDTO cartDTO);
 
+	public List<StoreDTO> getIndexCombo();
+
 }

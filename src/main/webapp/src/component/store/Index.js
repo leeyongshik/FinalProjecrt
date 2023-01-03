@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import indexStyles from '../../css/StoreIndex.module.css'
 
 const StoreIndex = () => {
+    const navigate = useNavigate()
+    const [combo, setCombo] = useState([])
+    const [popcorn, setPopcorn] = useState([])
+    const [drink, setDrink] = useState([])
+    const [snack, setSnack] = useState([])
+    const goToCombo = () => {
+        navigate('/store/combo')
+    }
+
+    useEffect(()=>{
+        // axios.get(`http://localhost:8080/store/getIndexCombo`)
+        //      .then(res => setCombo(res.data))
+        //      .catch(error => console.log(error))
+    },[])
     return (
         <>
             <div className={indexStyles.category_product_wrap}>
                 <ul className={indexStyles.category_product_list}>
                     <li>
-                        <strong className={indexStyles.category_product_title}>영화관람권
-                            <a href="#" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
+                        <strong className={indexStyles.category_product_title}>콤보
+                            <a href="#" onClick={ goToCombo } className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <li className="">
                                 <a href="#" className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>
@@ -24,10 +46,16 @@ const StoreIndex = () => {
                                         </span>
                                     </span>
                                 </a>
-                                <a href="#none" className={indexStyles.btn_category_product_cart}>1</a>
-                                <a href="#none" className={indexStyles.btn_category_product_gift}>2</a>
-                                <a href="#none" className={indexStyles.btn_category_product_buy}>3</a>
+                                <a href="#" className={indexStyles.btn_category_product_cart} style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>1</a>
+                            <a href="#" className={indexStyles.btn_category_product_gift} style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>2</a>
+                            <a href="#" className={indexStyles.btn_category_product_buy} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>3</a>
                             </li>
+
+
+
+
+
+
                             <li className="">
                                 <a href="#" className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>

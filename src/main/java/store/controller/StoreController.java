@@ -112,4 +112,9 @@ public class StoreController {
 		storeService.updateCart(cartDTO);
 	}
 	
+	@GetMapping(path = "getIndexCombo")
+	public List<StoreDTO> getIndexCombo() {
+		return storeService.getIndexCombo();
+	}
+	
 }

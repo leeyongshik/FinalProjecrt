@@ -101,5 +101,10 @@ public class StoreServiceImpl implements StoreService {
 		//DB
 		cartDAO.save(cartDTO);
 	}
+
+	@Override
+	public List<StoreDTO> getIndexCombo() {
+		return storeDAO.getIndexCombo();
+	}
 	
 }

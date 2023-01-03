@@ -5,22 +5,11 @@ import popcornStyles from '../../css/Popcorn.module.css'
 
 const StorePopcone = () => {
     const [list, setList] = useState([])
-    const [popcorn, setPopcorn] = useState('popcorn')
-    const [userName, setUserName] = useState('')
+    const [category, setCategory] = useState('popcorn')
     const navigate = useNavigate()
-    const [cart, setCart] = useState({
-        count : 1,
-        img : '',
-        price : '',
-        store_seq : '',
-        subSubject : '',
-        subject : '',
-        userName : '',
-        state : 'stand'
-    })
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/store/getPopcornList?category=${popcorn}`)
+    axios.get(`http://localhost:8080/store/getPopcornList?category=${category}`)
          .then(res => setList(res.data))
          .catch(error => console.log(error))
     

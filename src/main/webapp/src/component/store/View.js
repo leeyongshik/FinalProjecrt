@@ -36,6 +36,10 @@ const View = () => {
     const { subject, price, subSubject, country, content, img } = data
 
     useEffect(() => {
+        window.scroll({
+            top: 0,
+        })
+
         axios.get(`http://localhost:8080/store/getStore?store_seq=${store_seq}`)
              .then(res => setData(res.data))
              .catch(error => console.log(error))
@@ -66,7 +70,7 @@ const View = () => {
                 userName : sessionStorage.getItem("userName"),
                 store_seq : store_seq
             }})
-                 .then(res => res.data === 'exist' ? alert('장바구니에 이미 상품이 담겨있습니다.') 
+                 .then(res => res.data === 'exist' ? alert('장바구니에 이미 상품이 담겨있습니다.\n 장바구니를 확인해 주세요.') 
                  :
                  axios.post('http://localhost:8080/store/insertCart', null, {params: {
                     count : count,
@@ -75,7 +79,8 @@ const View = () => {
                     store_seq : store_seq,
                     subSubject : subSubject,
                     subject : subject,
-                    userName : sessionStorage.getItem("userName")
+                    userName : sessionStorage.getItem("userName"),
+                    state : 'cart'
                 }}
             )
                  .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})

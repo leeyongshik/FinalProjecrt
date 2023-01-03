@@ -26,7 +26,10 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	@Query("select userDTO from UserDTO userDTO where userDTO.userName=:userName and userDTO.password=:password")
 	public UserDTO login(@Param("userName") String userName, @Param("password") String password);
 	
-	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.category=:category")
+//	@Query("SELECT storeDTO.content, storeDTO.subject, storeDTO.store_seq FROM ( SELECT storeDTO.content, storeDTO.subject, storeDTO.store_seq, storeDTO.img, storeDTO.subsubject, storeDTO.price FROM StoreDTO storeDTO where storeDTO.category='combo' ORDER BY storeDTO.store_seq DESC ) WHERE ROWNUM <= 4")
+//	public List<StoreDTO> getIndexCombo();
+	
+	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='combo' ORDER BY storeDTO.store_seq DESC")
 	public List<StoreDTO> getIndexCombo();
 	
 }

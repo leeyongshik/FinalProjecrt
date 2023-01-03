@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import indexStyles from '../../css/StoreIndex.module.css'
@@ -13,10 +14,12 @@ const StoreIndex = () => {
     }
 
     useEffect(()=>{
-        // axios.get(`http://localhost:8080/store/getIndexCombo`)
-        //      .then(res => setCombo(res.data))
-        //      .catch(error => console.log(error))
+        axios.get(`http://localhost:8080/store/getIndexCombo`)
+             .then(res => setCombo(res.data))
+             .catch(error => console.log(error))
+        
     },[])
+    console.log(combo)
     return (
         <>
             <div className={indexStyles.category_product_wrap}>
@@ -29,7 +32,9 @@ const StoreIndex = () => {
                             
                             
                             
-                            
+                            {
+                                // const newCombo = combo.filter(item => item.length <= 4);
+                            }
                             
                             
                             

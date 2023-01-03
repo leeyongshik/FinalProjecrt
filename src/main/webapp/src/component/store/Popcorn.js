@@ -43,24 +43,38 @@ const StorePopcone = () => {
                         const goToCart = (e) => {
 
                             e.preventDefault()
+
                             sessionStorage.getItem("userName") === null ? 
-                                alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
-                                
-                                
-                                  
-                            axios.post('http://localhost:8080/store/insertCart', null, {params: {
-                                count : 1,
-                                img : item.img,
-                                price : item.price,
-                                store_seq : item.store_seq,
-                                subSubject : item.subSubject,
-                                subject : item.subject,
+                            alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
+
+                            axios.get('http://localhost:8080/store/isExistCart', {params: {
                                 userName : sessionStorage.getItem("userName"),
-                                state : 'stand'
-                              }}
-                              )
-                                        .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})
-                                        .catch(error => console.log(error))
+                                store_seq : item.store_seq
+                            }})
+                                .then(res => res.data === 'exist' ? alert('장바구니에 이미 상품이 담겨있습니다.') 
+                                :
+                                axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                                    count : 1,
+                                    img : item.img,
+                                    price : item.price,
+                                    store_seq : item.store_seq,
+                                    subSubject : item.subSubject,
+                                    subject : item.subject,
+                                    userName : sessionStorage.getItem("userName"),
+                                    state : 'cart'
+                                }}
+                            )
+                                .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})
+                                
+                                .catch(error => console.log(error))
+                                )
+                                .catch(error => console.log(error))
+                                
+                        }
+                        const goToPay = (e) => {
+
+                            e.preventDefault()
+                            
                                 
                         }
 
@@ -79,8 +93,8 @@ const StorePopcone = () => {
                                     </span>
                                 </Link>
                             <a href="#" className={popcornStyles.btn_category_product_cart} onClick={ goToCart } style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>1</a>
-                            <a href="#" className={popcornStyles.btn_category_product_gift} style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>2</a>
-                            <a href="#" className={popcornStyles.btn_category_product_buy} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>3</a>
+                            <a href="#" className={popcornStyles.btn_category_product_gift} onClick={ ()=> goToPay(item.cart_seq) } style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>2</a>
+                            <a href="#" className={popcornStyles.btn_category_product_buy} onClick={()=> alert('준비중입니다.')} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.6}}>3</a>
                             </li>
                         )
                     })

@@ -2,9 +2,44 @@ import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import payStyles from '../../css/StorePayment.module.css'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 const StorePayment = () => {
+    const navigate = useNavigate()
+    const payment = () => {
+        const { IMP } = window;
+        IMP.init('imp16543357')
+        // IMP.request_pay(param, callback) 결제창 호출  
+
+        IMP.request_pay(
+            {
+                // param
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: "230119000001",
+                name: '맛밤',
+                amount: 3500,
+                buyer_email: 'abc@naver.com',
+                buyer_name: '정주용',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울시 강남구',
+                buyer_postcode: '12345',
+            },
+            res => {
+                // callback
+                if (res.success) {
+                    // 결제 성공 시 로직,
+                    alert('결제가 완료되었습니다.');
+                    
+                    navigate('/store/paycomplete')
+                } else {
+                    // 결제 실패 시 로직,
+                    alert('결제에 실패하였습니다.');
+                }
+            },
+        );
+    };
+
     const [endPrice, setEndPrice] = useState('')
     const params = useParams().store_seq;
     const [store_seq, setStore_seq] = useState(params)
@@ -226,7 +261,7 @@ const StorePayment = () => {
                     </dl>
                 </div>
                 <div className={payStyles.com_btn_wrap}>
-                    <a href="#none" className={payStyles.btn_style0} style={{width:'500px'}}>결제하기</a> 
+                    <a href="#none" onClick={ payment } className={payStyles.btn_style0} style={{width:'500px'}}>결제하기</a> 
                     {/* <a href="#none" className={payStyles.btn_prev} onClick="javascript:location.replace('http://www.cgv.co.kr/culture-event/popcorn-store/user-cart.aspx');">
                         <img src="./../../../CDN/R2014/images/giftstore/common/btn_prev.png" alt="이전화면으로 이동"/>이전화면
                     </a> */}

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import store.bean.CartDTO;
+import store.bean.PayDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 import store.dao.CartDAO;
+import store.dao.PayDAO;
 import store.dao.StoreDAO;
 
 @Service
@@ -18,6 +20,8 @@ public class StoreServiceImpl implements StoreService {
 	private StoreDAO storeDAO;
 	@Autowired
 	private CartDAO cartDAO;
+	@Autowired
+	private PayDAO payDAO;
 
 	@Override
 	public List<StoreDTO> getStoreList() {
@@ -111,6 +115,17 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreDTO> getIndexCombo() {
 		return storeDAO.getIndexCombo();
+	}
+
+	@Override
+	public void insertPay(PayDTO payDTO) {
+		payDAO.save(payDTO);
+	}
+
+	@Override
+	public PayDTO getPay(String orderNumber) {
+		//DB
+		return payDAO.findByPay(orderNumber);
 	}
 	
 }

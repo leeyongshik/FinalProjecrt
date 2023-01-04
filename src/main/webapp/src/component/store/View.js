@@ -22,8 +22,8 @@ const reducer = (state, action) => {
 const View = () => {
     const [count, dispatch] = useReducer(reducer, initialState)
     const params = useParams().store_seq;
-
     const [store_seq, setStore_seq] = useState(params)
+
     const [endPrice, setEndPrice] = useState('')
     const [data, setData] = useState({
         subject: '',

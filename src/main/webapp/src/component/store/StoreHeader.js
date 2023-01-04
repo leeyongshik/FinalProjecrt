@@ -54,7 +54,7 @@ const StoreHeader = () => {
                             |
                         </li>
                         <li id="cm5" name="categorymenu" className={popcorn  ? styles.active : ""}>
-                            <a  href="#" onClick={ gotoPopcorn }>팝콘</a>
+                            <a onClick={ gotoPopcorn } style={{cursor:'pointer'}}>팝콘</a>
                             |
                         </li>
                         <li id="cm6" name="categorymenu" className={drink  ? styles.active : ""}>

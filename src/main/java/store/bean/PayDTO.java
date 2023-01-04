@@ -1,5 +1,9 @@
 package store.bean;
 
+import java.sql.Timestamp;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,26 +27,14 @@ public class PayDTO {
 	@Column(name = "pay_seq")
 	private int pay_seq;
 	
-	@Column(name="cart_seq", nullable = false, length = 30)
-	private int cart_seq;
-	
-	@Column(name="count", nullable = false, length = 30)
-	private int count;
-	
-	@Column(name="store_seq", nullable = false, length = 30)
-	private int store_seq;
-	
 	@Column(name="subject", nullable = false, length = 30)
 	private String subject;
-	
-	@Column(name="subsubject", nullable = false, length = 30)
-	private String subSubject;
 	
 	@Column(name="price", nullable = false, length = 30)
 	private String price;
 	
-	@Column(name="img")
-	private String img;
+	@Column(name="orderNumber", nullable = false, length = 30)
+	private String orderNumber;
 	
 	@Column(name="username", nullable = false, length = 30)
 	private String userName;

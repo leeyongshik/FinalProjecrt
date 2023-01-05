@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import store.bean.CartDTO;
+import store.bean.PayDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 import store.service.StoreService;
@@ -135,6 +136,18 @@ public class StoreController {
 	@GetMapping(path = "getIndexSnack")
 	public List<StoreDTO> getIndexSnack() {
 		return storeService.getIndexSnack();
+	}
+	
+	@PostMapping(path = "insertPay")
+	public void insertPay(@ModelAttribute PayDTO payDTO) {
+		System.out.println(payDTO.getOrderNumber());
+		storeService.insertPay(payDTO);
+	}
+	
+	@GetMapping(path = "getPay")
+	public PayDTO getPay(@RequestParam String orderNumber) {
+		System.out.println(orderNumber);
+		return storeService.getPay(orderNumber);
 	}
 	
 }

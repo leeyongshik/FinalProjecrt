@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import store.bean.CartDTO;
+import store.bean.PayDTO;
 import store.bean.StoreDTO;
 import store.bean.UserDTO;
 
@@ -36,11 +37,15 @@ public interface StoreService {
 	public CartDTO getOne(String userName, String store_seq);
 
 	public List<StoreDTO> getIndexCombo();
-
+	
 	public List<StoreDTO> getIndexPopcorn();
 
 	public List<StoreDTO> getIndexDrink();
 
 	public List<StoreDTO> getIndexSnack();
+
+	public void insertPay(PayDTO payDTO);
+
+	public PayDTO getPay(String orderNumber);
 
 }

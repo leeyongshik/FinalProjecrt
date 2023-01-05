@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import completeStyles from '../../css/PayComplete.module.css';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const PayComplete = () => {
+    const params = useParams().orderNumber;
+    
+    const [pay, setPay] = useState({
+        pay_seq: '',
+        subject: '',
+        price: '',
+        orderNumber: '',
+        userName: ''
+    })
+    const { pay_seq, subject, price, orderNumber, userName } = pay
+    
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getPay?orderNumber=${params}`)
+             .then(res => setPay(res.data))
+             .catch()
+    }, [])
+    console.log(pay)
+
     return (
         <div>
 
@@ -20,23 +40,11 @@ const PayComplete = () => {
                 <div className={completeStyles.payment_complete_contents_wrap}>
                     <p>
                         <strong>상품 결제가 완료되었습니다.</strong>
-                        <span>20230101581873</span></p>
+                        <span>{ orderNumber }</span></p>
                     <dl>
-                        <dt>총 상품금액</dt>
+                        <dt className={completeStyles.payment_complete_total}>총 결제금액</dt>
                         <dd>
-                            
-                            <span>7,000</span>
-                            
-                        </dd>
-                        <dt>할인금액</dt>
-                        <dd>
-                            
-                            <span>0</span>
-                            
-                        </dd>
-                        <dt className={completeStyles.payment_complete_total}>총 결제금액 (카카오페이)</dt>
-                        <dd>
-                            <span>7,000</span></dd>
+                            <span>{ price }</span></dd>
                     </dl>
                 </div>
                 <p className={completeStyles.com_box_design_olist}>

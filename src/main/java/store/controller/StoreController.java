@@ -122,4 +122,19 @@ public class StoreController {
 		return storeService.getIndexCombo();
 	}
 	
+	@GetMapping(path = "getIndexPopcorn")
+	public List<StoreDTO> getIndexPopcorn() {
+		return storeService.getIndexPopcorn();
+	}
+	
+	@GetMapping(path = "getIndexDrink")
+	public List<StoreDTO> getIndexDrink() {
+		return storeService.getIndexDrink();
+	}
+	
+	@GetMapping(path = "getIndexSnack")
+	public List<StoreDTO> getIndexSnack() {
+		return storeService.getIndexSnack();
+	}
+	
 }

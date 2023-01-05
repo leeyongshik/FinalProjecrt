@@ -37,4 +37,10 @@ public interface StoreService {
 
 	public List<StoreDTO> getIndexCombo();
 
+	public List<StoreDTO> getIndexPopcorn();
+
+	public List<StoreDTO> getIndexDrink();
+
+	public List<StoreDTO> getIndexSnack();
+
 }

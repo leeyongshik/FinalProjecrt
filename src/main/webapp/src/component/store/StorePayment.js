@@ -16,7 +16,7 @@ const StorePayment = () => {
                 // param
                 pg: 'html5_inicis',
                 pay_method: 'card',
-                merchant_uid: "230119000001",
+                merchant_uid: "230119000002",
                 name: '맛밤',
                 amount: 3500,
                 buyer_email: 'abc@naver.com',

@@ -31,5 +31,14 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	
 	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='combo' ORDER BY storeDTO.store_seq DESC")
 	public List<StoreDTO> getIndexCombo();
+
+	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='popcorn' ORDER BY storeDTO.store_seq DESC")
+	public List<StoreDTO> getIndexPopcorn();
+
+	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='drink' ORDER BY storeDTO.store_seq DESC")
+	public List<StoreDTO> getIndexDrink();
+
+	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='snack' ORDER BY storeDTO.store_seq DESC")
+	public List<StoreDTO> getIndexSnack();
 	
 }

@@ -62,7 +62,8 @@ const StorePopcone = () => {
                         }
                         const goToPay = () => {
 
-                            
+                            sessionStorage.getItem("userName") === null ? 
+                            alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
                             
                             axios.post('http://localhost:8080/store/insertCart', null, {params: {
                                     count : 1,

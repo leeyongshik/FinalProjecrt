@@ -112,5 +112,20 @@ public class StoreServiceImpl implements StoreService {
 	public List<StoreDTO> getIndexCombo() {
 		return storeDAO.getIndexCombo();
 	}
+
+	@Override
+	public List<StoreDTO> getIndexPopcorn() {
+		return storeDAO.getIndexPopcorn();
+	}
+
+	@Override
+	public List<StoreDTO> getIndexDrink() {
+		return storeDAO.getIndexDrink();
+	}
+
+	@Override
+	public List<StoreDTO> getIndexSnack() {
+		return storeDAO.getIndexSnack();
+	}
 	
 }

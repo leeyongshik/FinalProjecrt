@@ -17,9 +17,21 @@ const StoreIndex = () => {
         axios.get(`http://localhost:8080/store/getIndexCombo`)
              .then(res => setCombo(res.data))
              .catch(error => console.log(error))
+
+        axios.get(`http://localhost:8080/store/getIndexPopcorn`)
+             .then(res => setPopcorn(res.data))
+             .catch(error => console.log(error))
+
+        axios.get(`http://localhost:8080/store/getIndexDrink`)
+             .then(res => setDrink(res.data))
+             .catch(error => console.log(error))
+        
+        axios.get(`http://localhost:8080/store/getIndexSnack`)
+             .then(res => setSnack(res.data))
+             .catch(error => console.log(error))
         
     },[])
-    console.log(combo)
+    
     return (
         <>
             <div className={indexStyles.category_product_wrap}>
@@ -29,87 +41,92 @@ const StoreIndex = () => {
                             <a href="#" onClick={ goToCombo } className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
-                            
-                            
-                            
                             {
-                                // const newCombo = combo.filter(item => item.length <= 4);
+                                combo.map(item => {
+                                    
+                                    const goToCart = (e) => {
+
+                                        e.preventDefault()
+            
+                                        sessionStorage.getItem("userName") === null ? 
+                                        alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
+            
+                                        axios.get('http://localhost:8080/store/isExistCart', {params: {
+                                            userName : sessionStorage.getItem("userName"),
+                                            store_seq : item.store_seq
+                                        }})
+                                            .then(res => res.data === 'exist' ? alert('장바구니에 이미 상품이 담겨있습니다.') 
+                                            :
+                                            axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                                                count : 1,
+                                                img : item.img,
+                                                price : item.price,
+                                                store_seq : item.store_seq,
+                                                subSubject : item.subSubject,
+                                                subject : item.subject,
+                                                userName : sessionStorage.getItem("userName"),
+                                                state : 'cart'
+                                            }}
+                                        )
+                                            .then(() => { if (window.confirm('장바구니에 상품이 등록되었습니다.\n장바구니 페이지로 이동할까요?')){ navigate('/store/cart') }})
+                                            
+                                            .catch(error => console.log(error))
+                                            )
+                                            .catch(error => console.log(error))
+                                            
+                                    }
+                                    const goToPay = () => {
+            
+                                        sessionStorage.getItem("userName") === null ? 
+                                        alert('로그인이 필요합니다.') || navigate('/store/loginForm') :
+                                        
+                                        axios.post('http://localhost:8080/store/insertCart', null, {params: {
+                                                count : 1,
+                                                img : item.img,
+                                                price : item.price,
+                                                store_seq : item.store_seq,
+                                                subSubject : item.subSubject,
+                                                subject : item.subject,
+                                                userName : sessionStorage.getItem("userName"),
+                                                state : 'pay'
+                                            }})
+                                            .then(()=>navigate(`/store/pay/${item.store_seq}`))
+                                            .catch(error => console.log(error))
+                                    }
+                                    
+                                    return(
+                                    <li key={item.cart_seq}>
+                                        <a href="#" className={indexStyles.btn_category_product}>
+                                    <span className={indexStyles.best_product_img_wrap}>
+                                        <img src={`../storage/${ item.img }`} alt={ item.subject }/>
+                                    </span>
+                                    <span className={indexStyles.best_product_text_wrap}>
+                                        <span className={indexStyles.best_product_text_title}>{item.subject}</span>
+                                        <span className={indexStyles.best_product_text_name}>{item.content}</span>
+                                        <span className={indexStyles.best_product_sale_price_wrap}>
+                                            <span className={indexStyles.store_deatail_source_price}>{[item.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <a href="#" className={indexStyles.btn_category_product_cart} onClick={ goToCart } style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>1</a>
+                                <a href="#" className={indexStyles.btn_category_product_gift} onClick={ ()=> goToPay(item.cart_seq) } style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>2</a>
+                                <a href="#" className={indexStyles.btn_category_product_buy} onClick={()=> alert('준비중입니다.')} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>3</a>
+                                    </li>
+                                )})
                             }
-                            
-                            
-                            
-                            <li className="">
-                                <a href="#" className={indexStyles.btn_category_product}>
-                                    <span className={indexStyles.best_product_img_wrap}>
-                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16094706927780.jpg" alt="CGV 영화관람권"/>
-                                    </span>
-                                    <span className={indexStyles.best_product_text_wrap}>
-                                        <span className={indexStyles.best_product_text_title}>CGV 영화관람권</span>
-                                        <span className={indexStyles.best_product_text_name}>즐거운 경험은 CGV에서!</span>
-                                        <span className={indexStyles.best_product_sale_price_wrap}>
-                                            <span className={indexStyles.store_deatail_source_price}>12,000</span>
-                                        </span>
-                                    </span>
-                                </a>
-                                <a href="#" className={indexStyles.btn_category_product_cart} style={{background:' url(/img/cart.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>1</a>
-                            <a href="#" className={indexStyles.btn_category_product_gift} style={{background:' url(/img/bag-check.svg) no-repeat center', backgroundSize:'22pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>2</a>
-                            <a href="#" className={indexStyles.btn_category_product_buy} style={{background:' url(/img/gift.svg) no-repeat center', backgroundSize:'20pt', backgroundColor:'gray', borderRadius:'50%', opacity:0.9}}>3</a>
-                            </li>
-
-
-
-
-
-
-                            <li className="">
-                                <a href="#" className={indexStyles.btn_category_product}>
-                                    <span className={indexStyles.best_product_img_wrap}>
-                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15458911951520.jpg" alt="CGV 골드클래스"/>
-                                    </span>
-                                    <span className={indexStyles.best_product_text_wrap}>
-                                        <span className={indexStyles.best_product_text_title}>CGV 골드클래스</span>
-                                        <span className={indexStyles.best_product_text_name}>최고의 관람환경을 제공하는 프리미엄 상영관</span>
-                                        <span className={indexStyles.best_product_sale_price_wrap}>
-                                            <span className={indexStyles.store_deatail_source_price}>40,000</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li className="">
-                                <a href="#" className={indexStyles.btn_category_product}>
-                                    <span className={indexStyles.best_product_img_wrap}>
-                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16105061088530.jpg" alt="4DX관람권"/>
-                                    </span>
-                                    <span className={indexStyles.best_product_text_wrap}>
-                                        <span className={indexStyles.best_product_text_title}>4DX관람권</span>
-                                        <span className={indexStyles.best_product_text_name}>오감만족 영화 속 주인공 되기</span>
-                                        <span className={indexStyles.best_product_sale_price_wrap}>
-                                            <span className={indexStyles.store_deatail_source_price}>19,000</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li className="">
-                                <a href="#" className={indexStyles.btn_category_product}>
-                                    <span className={indexStyles.best_product_img_wrap}>
-                                        <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16104445886810.jpg" alt="IMAX 관람권"/>
-                                    </span>
-                                    <span className={indexStyles.best_product_text_wrap}>
-                                        <span className={indexStyles.best_product_text_title}>IMAX 관람권</span>
-                                        <span className={indexStyles.best_product_text_name}>사람이 볼 수 있는 최대 영상, IMAX</span>
-                                        <span className={indexStyles.best_product_sale_price_wrap}>
-                                            <span className={indexStyles.store_deatail_source_price}>18,000</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <li>
-                        <strong className={indexStyles.category_product_title}>기프트카드
+                        <strong className={indexStyles.category_product_title}>팝콘
                             <a href="#" className={indexStyles.btn_category_product} style={{background:'url(/img/plus-circle.svg) left top scroll no-repeat'}}>더보기</a>
                         </strong>
                         <ul className={indexStyles.category_product_inner_list}>
+                            
+                            
+                            
+                            
+                            
+                            
                             <li className={indexStyles.state_giftcard}>
                                 <a href="#" className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>

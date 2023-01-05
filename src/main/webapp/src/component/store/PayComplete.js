@@ -17,15 +17,36 @@ const PayComplete = () => {
     const { pay_seq, subject, totalPrice, orderNumber, userName } = pay
     
     useEffect(() => {
+        // window.Kakao.init(process.env.REACT_APP_ORDERNUMBER);
+        // console.log(process.env.REACT_APP_ORDERNUMBER)
         axios.get(`http://localhost:8080/store/getPay?orderNumber=${params}`)
              .then(res => setPay(res.data))
              .catch()
+             
     }, [])
     console.log(pay)
 
-    useEffect(() => {
-        
-    })
+    const sendKakaoMessage = () => {
+        window.Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: 'BITBOX에서 보내요!',
+                description: '상품 결제 내역입니다.',
+                imageUrl: 'bitbox',
+                link: {
+                    webUrl: 'http://localhost:3000/store/'
+                },
+            },
+            buttons: [
+                {
+                    title: '함께 해보기',
+                    link: {
+                        webUrl: 'http://localhost:3000/store/'
+                    },
+                },
+            ],
+        });
+    }
 
     return (
         <div>
@@ -58,6 +79,7 @@ const PayComplete = () => {
                 <div className={completeStyles.com_btn_wrap}>
                     <a href="#none" onclick="fn_PaymentDetail();" className={completeStyles.btn_style1}>결제내역</a> 
                     <a href="store-category.aspx?CategoryIdx=1" className={completeStyles.btn_style0}>상품 더보기</a>
+                    <a href="#" onClick={ sendKakaoMessage } className={completeStyles.btn_style0}>카카오톡으로 보내기</a>
                 </div>
             </div>
         </div>

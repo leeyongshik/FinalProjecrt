@@ -23,6 +23,10 @@ const PayComplete = () => {
     }, [])
     console.log(pay)
 
+    useEffect(() => {
+        
+    })
+
     return (
         <div>
 

@@ -109,7 +109,6 @@ public class StoreController {
 	
 	@PostMapping(path = "updateCart")
 	public void updateCart(@ModelAttribute CartDTO cartDTO) {
-		System.out.println(cartDTO.getCount());
 		storeService.updateCart(cartDTO);
 	}
 	
@@ -140,7 +139,7 @@ public class StoreController {
 	
 	@PostMapping(path = "insertPay")
 	public void insertPay(@ModelAttribute PayDTO payDTO) {
-		System.out.println(payDTO.getOrderNumber());
+		
 		storeService.insertPay(payDTO);
 	}
 	

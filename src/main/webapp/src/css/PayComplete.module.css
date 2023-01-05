@@ -262,10 +262,11 @@ dl:after, ul:after, ol:after {
     font-size: 17px;
 }
 .payment_complete_contents_wrap dt.payment_complete_total {
-    margin-top: 19px;
+    margin-top: 0;
+    margin-left: 180px;
     padding: 21px 0;
     font-size: 18px;
-    border-top: 1px solid #d6d6d6;
+    /* border-top: 1px solid #d6d6d6; */
 }
 .payment_complete_contents_wrap dt {
     clear: both;
@@ -279,12 +280,13 @@ dl:after, ul:after, ol:after {
     line-height: 28px;
 }
 .payment_complete_contents_wrap dt.payment_complete_total + dd {
-    margin-top: 19px;
+    margin-top: 0;
+    margin-left: -350px;
     padding: 21px 0;
     font-weight: 500;
     font-size: 22px;
     color: #fb4357;
-    border-top: 1px solid #d6d6d6;
+    /* border-top: 1px solid #d6d6d6; */
 }
 .payment_complete_contents_wrap dt.payment_complete_total + dd:after {
     content: '원';

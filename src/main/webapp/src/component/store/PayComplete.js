@@ -10,11 +10,11 @@ const PayComplete = () => {
     const [pay, setPay] = useState({
         pay_seq: '',
         subject: '',
-        price: '',
+        totalPrice: '',
         orderNumber: '',
         userName: ''
     })
-    const { pay_seq, subject, price, orderNumber, userName } = pay
+    const { pay_seq, subject, totalPrice, orderNumber, userName } = pay
     
     useEffect(() => {
         axios.get(`http://localhost:8080/store/getPay?orderNumber=${params}`)
@@ -44,7 +44,7 @@ const PayComplete = () => {
                     <dl>
                         <dt className={completeStyles.payment_complete_total}>총 결제금액</dt>
                         <dd>
-                            <span>{ price }</span></dd>
+                            <span>{ [totalPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }</span></dd>
                     </dl>
                 </div>
                 <p className={completeStyles.com_box_design_olist}>

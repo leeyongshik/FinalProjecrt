@@ -30,8 +30,8 @@ public class PayDTO {
 	@Column(name="subject", nullable = false, length = 30)
 	private String subject;
 	
-	@Column(name="price", nullable = false, length = 30)
-	private String price;
+	@Column(name="totalPrice", nullable = false, length = 30)
+	private String totalPrice;
 	
 	@Column(name="orderNumber", nullable = false, length = 30)
 	private String orderNumber;

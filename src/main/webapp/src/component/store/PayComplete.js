@@ -17,8 +17,7 @@ const PayComplete = () => {
     const { pay_seq, subject, totalPrice, orderNumber, userName } = pay
     
     useEffect(() => {
-        // window.Kakao.init(process.env.REACT_APP_ORDERNUMBER);
-        // console.log(process.env.REACT_APP_ORDERNUMBER)
+        
         axios.get(`http://localhost:8080/store/getPay?orderNumber=${params}`)
              .then(res => setPay(res.data))
              .catch()
@@ -27,6 +26,9 @@ const PayComplete = () => {
     console.log(pay)
 
     const sendKakaoMessage = () => {
+        window.Kakao.init(process.env.REACT_APP_ORDERNUMBER);
+        console.log(process.env.REACT_APP_ORDERNUMBER)
+
         window.Kakao.Link.sendDefault({
             objectType: 'feed',
             content: {
@@ -46,6 +48,8 @@ const PayComplete = () => {
                 },
             ],
         });
+
+        window.location.replace(`/store/paycomplete/${params}`)
     }
 
     return (

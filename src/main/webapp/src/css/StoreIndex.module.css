@@ -219,3 +219,13 @@ ol, ul {
     left: 335px;
     z-index: 4;
 }
+.category_product_inner_list li:hover .btn_category_product .best_product_text_wrap:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .85;
+    z-index: 1;
+}

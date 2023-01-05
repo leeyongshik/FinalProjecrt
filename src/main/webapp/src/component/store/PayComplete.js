@@ -3,8 +3,37 @@ import StoreHeader from './StoreHeader';
 import completeStyles from '../../css/PayComplete.module.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import crypto from 'crypto-js';
+
+const finErrCode = 404;
+const date = Date.now().toString();
 
 const PayComplete = () => {
+    
+    
+    const serviceId = 'ncp:sms:kr:299193861317:projectsmssend';
+    const secretKey = 'TOrOHYfInT7i38cPqTcDX5ndw2mRV0aJfQBIT6BK';
+    const accessKey = 'lzl1ZgUiNNupsSGHFLR9';
+    const my_number = '01022026441';
+    const phone = '01022026441'
+    const method = "POST";
+    const space = " ";
+    const newLine = "\n";
+    const url = `https://sens.apigw.ntruss.com/sms/v2/services/${serviceId}/messages`;
+    const url2 = `/sms/v2/services/${serviceId}/messages`;
+    const hmac = crypto.algo.HMAC.create(crypto.algo.SHA256, secretKey);
+    hmac.update(method);
+    hmac.update(space);
+    hmac.update(url2);
+    hmac.update(newLine);
+    hmac.update(date);
+    hmac.update(newLine);
+    hmac.update(accessKey);
+    const hash = hmac.finalize();
+    const signature = hash.toString(crypto.enc.Base64);
+    
+
+
     const params = useParams().orderNumber;
     
     const [pay, setPay] = useState({
@@ -33,23 +62,59 @@ const PayComplete = () => {
             objectType: 'feed',
             content: {
                 title: 'BITBOX에서 보내요!',
-                description: '상품 결제 내역입니다.',
+                description: `상품 결제 내역입니다.\n 주문번호 : ${params}`,
                 imageUrl: 'bitbox',
                 link: {
-                    webUrl: 'http://localhost:3000/store/'
+                    webUrl: `http://localhost:3000/store/`
                 },
             },
             buttons: [
                 {
-                    title: '함께 해보기',
+                    title: '주문내역 확인하기',
                     link: {
-                        webUrl: 'http://localhost:3000/store/'
+                        webUrl: `http://localhost:3000/store/paycomplete/${params}`
                     },
                 },
             ],
         });
 
         window.location.replace(`/store/paycomplete/${params}`)
+    }
+
+
+    const sendSMSMessage = () => {
+        axios(
+            {
+                method: method,
+                json: true,
+                url: url,
+                headers: {
+                  "Contenc-type": "application/json; charset=utf-8",
+                  "x-ncp-iam-access-key": accessKey,
+                  "x-ncp-apigw-timestamp": date,
+                  "x-ncp-apigw-signature-v2": signature,
+                },
+                body: {
+                    type:"SMS",
+                    contentType:"COMM",
+                    countryCode:"82",
+                    from:"01022026441",
+                    subject:"테스트",
+                    content:"문자발송",
+                    messages:[
+                        {
+                            to:"01022026441",
+                            subject:"테스트",
+                            content:"문자발송"
+                        }
+                    ],
+                },
+              })
+            .then(res=> console.log(res.data))
+            .catch(error=> console.log(error))
+        
+
+        
     }
 
     return (
@@ -84,6 +149,7 @@ const PayComplete = () => {
                     <a href="#none" onclick="fn_PaymentDetail();" className={completeStyles.btn_style1}>결제내역</a> 
                     <a href="store-category.aspx?CategoryIdx=1" className={completeStyles.btn_style0}>상품 더보기</a>
                     <a href="#" onClick={ sendKakaoMessage } className={completeStyles.btn_style0}>카카오톡으로 보내기</a>
+                    <a href="#" onClick={ sendSMSMessage } className={completeStyles.btn_style0}>문자로 보내기</a>
                 </div>
             </div>
         </div>

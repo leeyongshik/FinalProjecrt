@@ -3,63 +3,8 @@ import StoreHeader from './StoreHeader';
 import completeStyles from '../../css/PayComplete.module.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import crypto from 'crypto-js';
-
-// const finErrCode = 404;
-// const date = Date.now().toString();
 
 const PayComplete = () => {
-
-
-    // const serviceId = 'ncp:sms:kr:299193861317:projectsmssend';
-    // const secretKey = 'TOrOHYfInT7i38cPqTcDX5ndw2mRV0aJfQBIT6BK';
-    // const accessKey = 'lzl1ZgUiNNupsSGHFLR9';
-    // const my_number = '01022026441';
-    // const phone = '01022026441'
-    // const method = "POST";
-    // const space = " ";
-    // const newLine = "\n";
-    // const url = `https://sens.apigw.ntruss.com/sms/v2/services/${serviceId}/messages`;
-    // const url2 = `/sms/v2/services/${serviceId}/messages`;
-    // const hmac = crypto.algo.HMAC.create(crypto.algo.SHA256, secretKey);
-    // hmac.update(method);
-    // hmac.update(space);
-    // hmac.update(url2);
-    // hmac.update(newLine);
-    // hmac.update(date);
-    // hmac.update(newLine);
-    // hmac.update(accessKey);
-    // const hash = hmac.finalize();
-    // const signature = hash.toString(crypto.enc.Base64);
-    
-
-    // const data = {
-    //     type: 'SMS',
-    //     contentType: 'COMM',
-    //     countryCode: '82',
-    //     from: '01022026441', // 발신자 번호
-    //     content: `문자 내용 부분 입니다.`,
-    //     messages: [
-    //       {
-    //         to: '01022026441', // 수신자 번호
-    //       },
-    //     ],
-    //   };
-
-    //   const options = {
-    //     headers: {
-    //       'Content-Type': 'application/json; charset=utf-8',
-    //       'x-ncp-iam-access-key': accessKey,
-    //       'x-ncp-apigw-timestamp': Date.now().toString(),
-    //       'x-ncp-apigw-signature-v2': signature,
-    //     },
-    //   };
-
-
-
-
-
-    
     const params = useParams().orderNumber;
     
     const [pay, setPay] = useState({
@@ -70,12 +15,19 @@ const PayComplete = () => {
         userName: ''
     })
     const { pay_seq, subject, totalPrice, orderNumber, userName } = pay
+    const [user, setUser] = useState({
+        phoneNumber : ''
+    }) 
+    const {phoneNumber} = user
     
     useEffect(() => {
         
         axios.get(`http://localhost:8080/store/getPay?orderNumber=${params}`)
              .then(res => setPay(res.data))
-             .catch()
+             .catch(error => console.log(error))
+        axios.post(`http://localhost:8080/store/getUser?userName=${sessionStorage.getItem("userName")}`)
+             .then(res => setUser(res.data))
+             .catch(error => console.log(error))
              
     }, [])
 
@@ -106,78 +58,17 @@ const PayComplete = () => {
         window.location.replace(`/store/paycomplete/${params}`)
     }
 
+    const sendSMSMessage = () => {
+        axios.post('http://localhost:8080/store/sms', null, {params: {
+            recipientPhoneNumber : phoneNumber,
+            title : subject,
+            content : `상품 결제가 완료되었습니다. \n 주문번호 : ${orderNumber}`
 
-    // const sendSMSMessage = () => {
-
-
-
-    // axios.post(url, data, options)
-    //      .then(res => {console.log(res.data)})
-    //      .catch((err) => {console.error(err)});
-
-    //      return finErrCode;
-
-
-
-
-
-    // // const serviceId = 'ncp:sms:kr:299193861317:projectsmssend';
-    // // const secretKey = 'TOrOHYfInT7i38cPqTcDX5ndw2mRV0aJfQBIT6BK';
-    // // const accessKey = 'lzl1ZgUiNNupsSGHFLR9';
-    // // const my_number = '01022026441';
-    // // const phone = '01022026441'
-    // // const method = "POST";
-    // // const space = " ";
-    // // const newLine = "\n";
-    // // const url = `https://sens.apigw.ntruss.com/sms/v2/services/${serviceId}/messages`;
-    // // const url2 = `/sms/v2/services/${serviceId}/messages`;
-    // // const hmac = crypto.algo.HMAC.create(crypto.algo.SHA256, secretKey);
-    // // hmac.update(method);
-    // // hmac.update(space);
-    // // hmac.update(url2);
-    // // hmac.update(newLine);
-    // // hmac.update(date);
-    // // hmac.update(newLine);
-    // // hmac.update(accessKey);
-    // // const hash = hmac.finalize();
-    // // const signature = hash.toString(crypto.enc.Base64);
-
-    // // console.log(serviceId)
-    // // console.log(signature)
-
-    //     // axios(
-    //     //     {
-    //     //         method: method,
-    //     //         json: true,
-    //     //         url: url,
-    //     //         headers: {
-    //     //           "Content-type": "application/json; charset=utf-8",
-    //     //           "x-ncp-iam-access-key": accessKey,
-    //     //           "x-ncp-apigw-timestamp": date,
-    //     //           "x-ncp-apigw-signature-v2": secretKey,
-    //     //         },
-    //     //         body: {
-    //     //             type:"SMS",
-    //     //             contentType:"COMM",
-    //     //             countryCode:"82",
-    //     //             from:"01022026441",
-    //     //             subject:"테스트",
-    //     //             content:"문자발송",
-    //     //             messages:[
-    //     //                 {
-    //     //                     to:"01022026441",
-    //     //                     subject:"테스트",
-    //     //                     content:"문자발송"
-    //     //                 }
-    //     //             ],
-    //     //         },
-    //     //       })
-    //     //     .then(res=> console.log(res.data))
-    //     //     .catch(error=> console.log(error))
-        
-      
-        
-    // }
+          }}
+          )
+        .then(res => console.log(res.data))
+        .catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -212,7 +103,7 @@ const PayComplete = () => {
                     <br />
                     <a href="#" className={completeStyles.btn_style0} style={{ marginBottom: 10}}>상품 더보기</a>
                     <a href="#" onClick={ sendKakaoMessage } className={completeStyles.btn_style0}>카카오톡으로 보내기</a>
-                    <a href="#" className={completeStyles.btn_style0}>문자로 보내기</a>
+                    <a href="#" onClick={ sendSMSMessage } className={completeStyles.btn_style0}>문자로 보내기</a>
                     {/* onClick={ sendSMSMessage } */}
                 </div>
             </div>

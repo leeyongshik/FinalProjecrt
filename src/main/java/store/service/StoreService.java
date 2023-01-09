@@ -21,6 +21,8 @@ public interface StoreService {
 	public List<StoreDTO> getPopcornList(String category);
 
 	public UserDTO login(UserDTO userDTO);
+	
+	public UserDTO getUser(String userName);
 
 	public void insertCart(CartDTO cartDTO);
 

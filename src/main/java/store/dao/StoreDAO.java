@@ -41,4 +41,7 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	@Query("SELECT storeDTO FROM StoreDTO storeDTO where storeDTO.category='snack' ORDER BY storeDTO.store_seq DESC")
 	public List<StoreDTO> getIndexSnack();
 	
+	@Query("select userDTO from UserDTO userDTO where userDTO.userName=:userName")
+	public UserDTO getUser(@Param("userName") String userName);
+	
 }

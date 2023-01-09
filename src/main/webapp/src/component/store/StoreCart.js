@@ -4,10 +4,55 @@ import cartStyles from '../../css/StoreCart.module.css'
 import axios from 'axios';
 import StorePayment from './StorePayment';
 import { useNavigate } from 'react-router-dom';
-
+import styles from '../../css/List.module.css'
 
 
 const StoreCart = () => {
+    const [count, setCount] = useState(0)
+    const [combo, setCombo] = useState(false)
+    const [popcorn, setPopcorn] = useState(false)
+    const [drink, setDrink] = useState(false)
+    const [snack, setSnack] = useState(false)
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setCount(res.data.length))
+         .catch(error => console.log(error))
+    }, [])
+    
+    const gotoCombo = () => {
+        setCombo(true)
+        setPopcorn(false)
+        setDrink(false)
+        setSnack(false)
+        navigate('/store/combo')
+    }
+    const gotoPopcorn = () => {
+        setCombo(false)
+        setPopcorn(true)
+        setDrink(false)
+        setSnack(false)
+        navigate('/store/popcorn')
+    }
+    const gotoDrink = () => {
+        setCombo(false)
+        setPopcorn(false)
+        setDrink(true)
+        setSnack(false)
+        navigate('/store/drink')
+    }
+    const gotoSnack = () => {
+        setCombo(false)
+        setPopcorn(false)
+        setDrink(false)
+        setSnack(true)
+        navigate('/store/snack')
+    }
+
+    const gotoCart = () => {
+        navigate('/store/cart')
+    }
+
+
     const [list, setList] = useState([])
     const [countList, setCountList] = useState([])
     const [show, setShow] = useState(false)
@@ -84,9 +129,8 @@ const StoreCart = () => {
                  .catch(error => console.log(error))
         }
 
-
         window.location.replace('/store/pay')
-
+        
     }
 
     const getTotalPrice = list => {
@@ -97,15 +141,65 @@ const StoreCart = () => {
         return sum;
       };
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const nowBuy = (targetSeq) => {
-        setOne(list.find((item) => item.cart_seq !== targetSeq));
+        setOne(list.find((item) => item.cart_seq === targetSeq ? 
+        axios.post('http://localhost:8080/store/updateCart', null, {params: {
+                                cart_seq : item.cart_seq,
+                                count : item.count,
+                                store_seq : item.store_seq,
+                                subject : item.subject,
+                                subSubject : item.subSubject,
+                                price : item.price,
+                                userName : sessionStorage.getItem("userName"),
+                                img : item.img,
+                                state : 'pay'
+
+                              }}
+                              )
+                 .then(navigate(`/store/pay/${item.store_seq}`))
+                 .catch(error => console.log(error))
+        :
+        ''
+        ));
         
     }
 
+    useEffect(() => {
+        axios.get(`http://localhost:8080/store/getCartList?userName=${sessionStorage.getItem("userName")}`)
+         .then(res => setCount(res.data.length))
+         .catch(error => console.log(error))
+    }, [list])
+
     return (
         <div>
-            <StoreHeader/>
+            <div className={styles.category_wrap}>
+                <div className={styles.category_contents_wrap}>
+                    <ul className={styles.category_content} style={{listStyle: 'none'}}>
+                        <li id="cm4" name="categorymenu" className={combo  ? styles.active : ""}>
+                            <a onClick={ gotoCombo } style={{cursor:'pointer'}}>콤보</a>
+                            |
+                        </li>
+                        <li id="cm5" name="categorymenu" className={popcorn  ? styles.active : ""}>
+                            <a onClick={ gotoPopcorn } style={{cursor:'pointer'}}>팝콘</a>
+                            |
+                        </li>
+                        <li id="cm6" name="categorymenu" className={drink  ? styles.active : ""}>
+                            <a onClick={ gotoDrink } style={{cursor:'pointer'}}>음료</a>
+                            |
+                        </li>
+                        <li id="cm7" name="categorymenu" className={snack  ? styles.active : ""}>
+                            <a onClick={ gotoSnack } style={{cursor:'pointer'}}>스낵</a>
+                        </li>
+                    </ul>
+                    <ul className={styles.cart_content} style={{listStyle: 'none'}}>
+                        <li>
+                            <a href="#" onClick={ gotoCart }>장바구니</a>
+                            <span id="cartviewcnt">{ count }</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             <div className={cartStyles.cart_step_wrap}>
 		        <ul className={cartStyles.cart_step}>
@@ -179,11 +273,11 @@ const StoreCart = () => {
                         </div>
                         <span className={cartStyles.product_info_price} id="totalgoodsprice900734">{[item.price * item.count].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                         <div className={cartStyles.product_info_btn_wrap}>
-                            <a href="#none" onClick={() => nowBuy(item.cart_seq) } >바로구매</a>
+                            <a onClick={() => nowBuy(item.cart_seq) } style={{ cursor: 'pointer'}}>바로구매</a>
                             {/* <a href="#none" >선물하기</a> */}
                         </div>
                         {/* <a href="javascript:fn_Del('900734')" onClick={ () => onRemove(item.cart_seq) } className={cartStyles.btn_product_delect}>삭제</a> */}
-                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect} style={{background:'url(/img/x.svg) no-repeat center', backgroundSize:'8pt'}}>삭제</button>
+                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect} style={{background:'url(/img/x.svg) no-repeat center', backgroundSize:'8pt', cursor: 'pointer'}}>삭제</button>
                     </li>
                         )
                     })
@@ -212,7 +306,7 @@ const StoreCart = () => {
 
                 <div className={cartStyles.com_btn_wrap }> {/* cartStyles.pT60 */}
                     {/* <a href="#none" className={cartStyles.btn_style0 } onClick="javascript:fn_Buy(this, 'gift', '');">선물하기</a> */}
-                    <a href="#none" onClick={ onBuy } className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20 }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
+                    <a onClick={ () => list.length === 0 ? alert('장바구니에 상품이 없습니다. 스토어 페이지로 이동합니다.') || navigate('/store/') : onBuy() } className={cartStyles.btn_style0 } style={{ marginTop: 25, marginBottom: 20, cursor: 'pointer' }} >구매하기</a> {/* onClick="javascript:fn_Buy(this, 'purchase', '');" */}
                 </div>
             </div>
             

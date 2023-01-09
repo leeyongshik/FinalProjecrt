@@ -8,6 +8,12 @@ const StorePay = () => {
         const [ list, setList ] = useState([])
         const [ listCount, setListCount ] = useState(0)
         const [ basket, setBasket ] = useState('')
+        const [ user, setUser ] = useState({
+            userName: '',
+            name: '',
+            phoneNumber: ''
+        })
+        const { name, phoneNumber } = user
 
         const [ form, setForm ] = useState({
             subject: '',
@@ -80,6 +86,12 @@ const StorePay = () => {
                     .catch(error => console.log(error))
         }, [])
 
+        useEffect(() => {
+            axios.post(`http://localhost:8080/store/getUser?userName=${sessionStorage.getItem("userName")}`)
+                 .then(res => setUser(res.data))
+                 .catch(error => console.log(error))
+                }, [])
+
         const getTotalPrice = list => {
             let sum = 0;
             for (let i = 0; i < list.length; i++) {
@@ -103,8 +115,8 @@ const StorePay = () => {
                     name: basket,
                     amount: getTotalPrice(list),
                     buyer_email: '',
-                    buyer_name: '정주용',
-                    buyer_tel: '010-1234-5678',
+                    buyer_name: name,
+                    buyer_tel: [phoneNumber].toString().replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
                     buyer_addr: '',
                     buyer_postcode: '',
                 },
@@ -232,9 +244,9 @@ const StorePay = () => {
                 <ul className={payStyles.com_box_design}>
                     <li>
                         <label>이름</label>
-                        <input type="text" id="user_info_name" placeholder="이름" value="이용식" readOnly="" style={{width:'128px'}}/>
+                        <input type="text" value={ name } readOnly style={{width:'128px'}}/>
                         <label>휴대전화 번호</label>
-                        <input type="tel" id="user_info_phonenum" placeholder="휴대전화 번호" value="010-2202-6441" readOnly="" style={{width:'228px'}}/>
+                        <input type="tel" value={[phoneNumber].toString().replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')} readOnly style={{width:'228px'}}/>
                     </li>
                 </ul>
                 <p className={payStyles.com_box_design_olist}>

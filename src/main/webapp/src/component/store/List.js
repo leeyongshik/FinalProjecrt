@@ -86,6 +86,11 @@ const List = () => {
         navigate('/store/snack')
     }
     const [count, setCount] = useState(0)
+
+    const gotoCart = () => {
+        navigate('/store/cart')
+    }
+
     return (
         <div >
             <div className={styles.big_banner_wrap}>
@@ -127,7 +132,7 @@ const List = () => {
                     </ul>
                     <ul className={styles.cart_content} style={{listStyle: 'none'}}>
                         <li>
-                            <a href="#">장바구니</a>
+                            <a href="#" onClick={ gotoCart }>장바구니</a>
                             <span id="cartviewcnt">{ count }</span>
                         </li>
                     </ul>

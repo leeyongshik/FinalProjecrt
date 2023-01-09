@@ -99,7 +99,7 @@ const StoreIndex = () => {
                                     }
                                     
                                     return(
-                                    <li key={item.cart_seq}>
+                                    <li key={item.store_seq}>
                                         <Link to={`/store/view/${ item.store_seq }`} className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>
@@ -179,7 +179,7 @@ const StoreIndex = () => {
                                     }
                                     
                                     return(
-                                    <li key={item.cart_seq}>
+                                    <li key={item.store_seq}>
                                         <Link to={`/store/view/${ item.store_seq }`} className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>
@@ -259,7 +259,7 @@ const StoreIndex = () => {
                                     }
                                     
                                     return(
-                                    <li key={item.cart_seq}>
+                                    <li key={item.store_seq}>
                                         <Link to={`/store/view/${ item.store_seq }`} className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>
@@ -339,7 +339,7 @@ const StoreIndex = () => {
                                     }
                                     
                                     return(
-                                    <li key={item.cart_seq}>
+                                    <li key={item.store_seq}>
                                         <Link to={`/store/view/${ item.store_seq }`} className={indexStyles.btn_category_product}>
                                     <span className={indexStyles.best_product_img_wrap}>
                                         <img src={`../storage/${ item.img }`} alt={ item.subject }/>

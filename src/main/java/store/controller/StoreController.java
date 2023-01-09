@@ -81,6 +81,11 @@ public class StoreController {
 		return storeService.login(userDTO);
 	}
 	
+	@PostMapping(path = "getUser")
+	public UserDTO getUser(@RequestParam String userName) {
+		return storeService.getUser(userName);
+	}
+	
 	//carttable 이용
 	@PostMapping(path = "insertCart")
 	public void insertCart(@ModelAttribute CartDTO cartDTO) {
@@ -109,6 +114,7 @@ public class StoreController {
 	
 	@PostMapping(path = "updateCart")
 	public void updateCart(@ModelAttribute CartDTO cartDTO) {
+		System.out.println(cartDTO.getCart_seq());
 		storeService.updateCart(cartDTO);
 	}
 	

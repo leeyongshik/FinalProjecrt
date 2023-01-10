@@ -11,6 +11,7 @@ import StorePayment from './component/store/StorePayment';
 import LoginForm from './component/store/LoginForm';
 import PayComplete from './component/store/PayComplete';
 import StorePay from './component/store/StorePay';
+import More from './component/main/More';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/store/pay/:store_seq' element={<StorePayment/>}></Route>
           <Route path='/store/paycomplete/:orderNumber' element={<PayComplete/>}></Route>
           <Route path='/store/pay' element={<StorePay/>}></Route>
+          <Route path='/store/more' element={<More/>}></Route>
 
         </Routes>
       </>

@@ -1,0 +1,29 @@
+[
+    {
+    "id": 0,
+    "title": "White and Black",
+    "name": "화이트 앤 블랙",
+    "content": "Born in France",
+    "price": 120000,
+    "image": "https://codingapple1.github.io/shop/shoes1.jpg",
+    "qty": 0
+    },
+    {
+    "id": 1,
+    "title": "Red Knit",
+    "name": "레드 니트",
+    "content": "Born in Seoul",
+    "price": 110000,
+    "image": "https://codingapple1.github.io/shop/shoes2.jpg",
+    "qty": 0
+    },
+    {
+    "id": 2,
+    "title": "Grey Yordan",
+    "name": "그레이 요르단",
+    "content": "Born in the States",
+    "price": 130000,
+    "image": "https://codingapple1.github.io/shop/shoes3.jpg",
+    "qty": 0
+    }
+    ]

@@ -244,7 +244,7 @@ const StorePay = () => {
                 <ul className={payStyles.com_box_design}>
                     <li>
                         <label>이름</label>
-                        <input type="text" value={ name } readOnly style={{width:'128px'}}/>
+                        <input type="text" value={ name } readOnly />
                         <label>휴대전화 번호</label>
                         <input type="tel" value={[phoneNumber].toString().replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')} readOnly style={{width:'228px'}}/>
                     </li>
@@ -262,7 +262,7 @@ const StorePay = () => {
                 <ul className={payStyles.com_box_design}>
                 <li>
                         {/* <input type="radio" name="radio" className={payStyles.com_custom_radio} id="payment_kakaopay"/> */}
-                        <input type="radio" checked/>
+                        <input type="radio" defaultChecked/>
                         <label>
                             <img src="../../img/kg_inicis.jpg" alt="KG이니시스" style={{ border: '1px solid gray', borderRadius: 5, marginTop: '15px', marginLeft: '-40px', width: 90, height: 40, boxShadow: '3px 3px 3px gray' }}/>
                         </label>

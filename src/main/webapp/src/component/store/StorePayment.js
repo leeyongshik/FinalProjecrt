@@ -229,7 +229,7 @@ const StorePayment = () => {
                     
                     <li>
                         {/* <input type="radio" name="radio" className={payStyles.com_custom_radio} id="payment_kakaopay"/> */}
-                        <input type="radio" checked/>
+                        <input type="radio" defaultChecked/>
                         <label>
                             <img src="../../img/kg_inicis.jpg" alt="KG이니시스" style={{ border: '1px solid gray', borderRadius: 5, marginTop: '15px', marginLeft: '-40px', width: 90, height: 40, boxShadow: '3px 3px 3px gray' }}/>
                         </label>

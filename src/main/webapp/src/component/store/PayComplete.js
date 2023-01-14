@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StoreHeader from './StoreHeader';
 import completeStyles from '../../css/PayComplete.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const PayComplete = () => {
@@ -39,7 +39,7 @@ const PayComplete = () => {
             objectType: 'feed',
             content: {
                 title: 'BITBOX에서 보내요!',
-                description: `상품 결제 내역입니다.\n 주문번호 : ${params}`,
+                description: `상품 결제 내역입니다. \n주문번호 : ${params}`,
                 imageUrl: 'bitbox',
                 link: {
                     webUrl: `http://localhost:3000/store/`
@@ -62,12 +62,21 @@ const PayComplete = () => {
         axios.post('http://localhost:8080/store/sms', null, {params: {
             recipientPhoneNumber : phoneNumber,
             title : subject,
-            content : `상품 결제가 완료되었습니다. \n 주문번호 : ${orderNumber}`
+            content : `BITBOX에서 상품 결제가 완료되었습니다. \n주문번호 : ${orderNumber}`
 
           }}
           )
         .then(res => console.log(res.data))
         .catch(error => console.log(error))
+    }
+
+    const navigate = useNavigate()
+    const gotoMypageReservation = () => {
+        navigate('/myPage/reservation')
+    }
+
+    const gotoStoreIndex = () => {
+        navigate('/store/')
     }
 
     return (
@@ -99,9 +108,9 @@ const PayComplete = () => {
                 <p className={completeStyles.com_box_design_olist}>
                     친구에게 선물한 경우 입력하신 수신번호로 상품교환이 가능한 기프트콘이 발송됩니다.</p>
                 <div className={completeStyles.com_btn_wrap}>
-                    <a href="#none" className={completeStyles.btn_style1} style={{ marginTop: 10, marginBottom: 30}}>결제내역</a>
+                    <a href="#none" onClick={ gotoMypageReservation } className={completeStyles.btn_style1} style={{ marginTop: 10, marginBottom: 30}}>결제내역</a>
                     <br />
-                    <a href="#" className={completeStyles.btn_style0} style={{ marginBottom: 10}}>상품 더보기</a>
+                    <a href="#" onClick={ gotoStoreIndex } className={completeStyles.btn_style0} style={{ marginBottom: 10}}>상품 더보기</a>
                     <a href="#" onClick={ sendKakaoMessage } className={completeStyles.btn_style0}>카카오톡으로 보내기</a>
                     <a href="#" onClick={ sendSMSMessage } className={completeStyles.btn_style0}>문자로 보내기</a>
                     {/* onClick={ sendSMSMessage } */}

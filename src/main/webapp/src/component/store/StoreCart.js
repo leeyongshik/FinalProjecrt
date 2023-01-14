@@ -83,7 +83,7 @@ const StoreCart = () => {
         const newList = list.filter((item) => item.cart_seq !== targetSeq);
         setList(newList);
         axios.get(`http://localhost:8080/store/deleteCart?cart_seq=${targetSeq}`)
-             .then(alert('선택하신 상품이 삭제되었습니다!'))
+             .then(alert('해당 상품이 삭제되었습니다!'))
              .catch(error => console.log(error))
 
         // 장바구니 삭제 후 카운트와 아다리맞추기
@@ -277,7 +277,7 @@ const StoreCart = () => {
                             {/* <a href="#none" >선물하기</a> */}
                         </div>
                         {/* <a href="javascript:fn_Del('900734')" onClick={ () => onRemove(item.cart_seq) } className={cartStyles.btn_product_delect}>삭제</a> */}
-                        <button onClick={ () => { if (window.confirm(`${item.cart_seq}번째 상품을 삭제하시겠습니까`)){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect} style={{background:'url(/img/x.svg) no-repeat center', backgroundSize:'8pt', cursor: 'pointer'}}>삭제</button>
+                        <button onClick={ () => { if (window.confirm('선택하신 상품을 삭제하시겠습니까')){ onDelete(item.cart_seq); }} } className={cartStyles.btn_product_delect} style={{background:'url(/img/x.svg) no-repeat center', backgroundSize:'8pt', cursor: 'pointer'}}>삭제</button>
                     </li>
                         )
                     })
